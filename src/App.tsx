@@ -18,6 +18,18 @@ function App() {
     email: 'successbrownson222@gmail.com',
     phone: '+234 912 596 9210',
     github: 'https://github.com/successbrownson222-cloud', // <-- UPDATE THIS
+<h1>Success Brownson</h1>
+<p>Fullstack Engineer</p>
+
+{/* PASTE IT HERE */}
+<a 
+  href="https://drive.google.com/file/d/1IwSg3fYrlcwhFqMtDga3a_WzEifLDG4_/view?usp=drivesdk" 
+  target="_blank"
+  rel="noopener noreferrer"
+  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+>
+  Download CV
+</a>
     linkedin:
       'https://www.linkedin.com/in/success-brownson-290292418?utm_source=share_via&utm_content=profile&utm_medium=member_android', // <-- UPDATE THIS
     twitter: 'https://twitter.com/',
