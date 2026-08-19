@@ -24,10 +24,10 @@ function App() {
     resume: 'https://eu.wps.com/cms/docs/d/cbOaklj8TyUpAgNh?sa=601.1074', // <-- UPDATE THIS WITH GOOGLE DRIVE LINK
     photo: 'https://files.catbox.moe/b84keh.jpg', // <-- YOUR PHOTO
     about:
-      'Fullstack Engineer with 6+ years building responsive web apps with React, Next.js, Node.js, Python, and Java Spring Boot. I build scalable products that solve real problems for businesses in Nigeria and globally.',
+      'Fullstack Developer with 6+ years building responsive web apps with React, Next.js, Node.js, Python, and Java Spring Boot. I build scalable products that solve real problems for businesses in Nigeria and globally.',
     skills: [
       { name: 'React.js', level: 90, category: 'Frontend' },
-      { name: 'Next.js', level: 85, category: 'Frontend' },
+      { name: 'Javascript', level: 85, category: 'Frontend' },
       { name: 'TypeScript', level: 80, category: 'Frontend' },
       { name: 'Node.js', level: 85, category: 'Backend' },
       { name: 'Python', level: 75, category: 'Backend' },
