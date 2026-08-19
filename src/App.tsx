@@ -18,8 +18,6 @@ function App() {
     email: 'successbrownson222@gmail.com',
     phone: '+234 912 596 9210',
     github: 'https://github.com/successbrownson222-cloud', // <-- UPDATE THIS
-<h1>Success Brownson</h1>
-<p>Fullstack Engineer</p>
 
 {/* PASTE IT HERE */}
 <a 
