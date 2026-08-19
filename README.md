@@ -28,11 +28,5 @@ If you are developing a production application, we recommend enabling type-aware
   }
 }
 ```
----
-
-## 📄 Resume
-You can view or download my CV here:  
-[Download CV](https://drive.google.com/file/d/1IwSg3fYrlcwhFqMtDga3a_WzEifLDG4_/view?usp=drivesdk)
-
 
 See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
