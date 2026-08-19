@@ -13,7 +13,7 @@ function App() {
 
   const data = {
     name: 'SUCCESS BROWNSON TEC',
-    role: 'Fullstack Engineer',
+    role: 'Fullstack Developer',
     location: 'Abia, Nigeria',
     email: 'successbrownson222@gmail.com',
     phone: '+234 912 596 9210',
