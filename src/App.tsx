@@ -214,6 +214,7 @@ function App() {
             <a
               href={data.resume}
                 target="_blank"
+               style={{
                 border: `2px solid ${c.accent}`,
                 color: c.accent,
                 padding: '10px 20px',
