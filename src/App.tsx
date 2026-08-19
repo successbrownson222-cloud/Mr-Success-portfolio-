@@ -24,14 +24,14 @@ function App() {
     resume: 'https://eu.wps.com/cms/docs/d/cbOaklj8TyUpAgNh?sa=601.1074', // <-- UPDATE THIS WITH GOOGLE DRIVE LINK
     photo: 'https://files.catbox.moe/b84keh.jpg', // <-- YOUR PHOTO
     about:
-      'Fullstack Developer with 6+ years building responsive web apps with React, Next.js, Node.js, Python, and Java Spring Boot. I build scalable products that solve real problems for businesses in Nigeria and globally.',
+      'Fullstack Developer with 6+ years building responsive web apps with React, JavaScript, Node.js, Python, and Php. I build scalable products that solve real problems for businesses in Nigeria and globally.',
     skills: [
       { name: 'React.js', level: 90, category: 'Frontend' },
       { name: 'Javascript', level: 85, category: 'Frontend' },
       { name: 'TypeScript', level: 80, category: 'Frontend' },
       { name: 'Node.js', level: 85, category: 'Backend' },
       { name: 'Python', level: 75, category: 'Backend' },
-      { name: 'Java Spring Boot', level: 70, category: 'Backend' },
+      { name: 'Php', level: 70, category: 'Backend' },
       { name: 'PostgreSQL', level: 80, category: 'Database' },
       { name: 'MongoDB', level: 85, category: 'Database' },
       { name: 'Docker', level: 65, category: 'DevOps' },
@@ -40,7 +40,7 @@ function App() {
     projects: [
       {
         name: 'Aba Market E-commerce',
-        tech: 'Next.js, Node.js, MongoDB',
+        tech: 'React.js, Node.js, MongoDB',
         category: 'Fullstack',
         desc: 'E-commerce platform connecting 200+ Aba vendors to customers with Paystack integration.',
         link: '#',
