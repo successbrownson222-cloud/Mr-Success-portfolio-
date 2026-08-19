@@ -136,15 +136,6 @@ function App() {
           zIndex: 100,
         }}
       >
-{/* PASTE IT HERE */}
-<a 
-  href="https://drive.google.com/file/d/1IwSg3fYrlcwhFqMtDga3a_WzEifLDG4_/view?usp=drivesdk" 
-  target="_blank"
-  rel="noopener noreferrer"
-  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
->
-  Download CV
-</a>
         {theme === 'dark' ? '☀️' : '🌙'}
       </button>
 
@@ -236,6 +227,15 @@ function App() {
             </a>
           </div>
         </header>
+{/* PASTE IT HERE */}
+<a 
+  href="https://drive.google.com/file/d/1IwSg3fYrlcwhFqMtDga3a_WzEifLDG4_/view?usp=drivesdk" 
+  target="_blank"
+  rel="noopener noreferrer"
+  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+>
+  Download CV
+</a>
 
         <nav
           style={{
