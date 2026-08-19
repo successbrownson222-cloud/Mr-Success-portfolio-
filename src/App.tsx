@@ -214,7 +214,6 @@ function App() {
             <a
               href="https://drive.google.com/file/d/1IwSg3fYrlcwhFqMtDga3a_WzEifLDG4_/view?usp=drivesdk" 
   target="_blank"
-rel="noopener noreferrer"
                 border: `2px solid ${c.accent}`,
                 color: c.accent,
                 padding: '10px 20px',
