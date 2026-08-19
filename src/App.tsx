@@ -21,7 +21,7 @@ function App() {
     linkedin:
       'https://www.linkedin.com/in/success-brownson-290292418?utm_source=share_via&utm_content=profile&utm_medium=member_android', // <-- UPDATE THIS
     twitter: 'https://twitter.com/',
-    resume: 'https://eu.wps.com/cms/docs/d/cbOaklj8TyUpAgNh?sa=601.1074', // <-- UPDATE THIS WITH GOOGLE DRIVE LINK
+    resume: '#', // <-- UPDATE THIS WITH GOOGLE DRIVE LINK
     photo: 'https://files.catbox.moe/b84keh.jpg', // <-- YOUR PHOTO
     about:
       'Fullstack Developer with 6+ years building responsive web apps with React, JavaScript, Typescript,Node.js, Python, and Php,Java Spring Boot.I build scalable products that solve real problems for businesses in Nigeria and globally.',
