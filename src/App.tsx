@@ -22,7 +22,7 @@ function App() {
     linkedin:
       'https://www.linkedin.com/in/success-brownson-290292418?utm_source=share_via&utm_content=profile&utm_medium=member_android', // <-- UPDATE THIS
     twitter: 'https://twitter.com/',
-    resume: '#', // <-- UPDATE THIS WITH GOOGLE DRIVE LINK
+    resume: 'https://drive.google.com/file/d/1IwSg3fYrlcwhFqMtDga3a_WzEifLDG4_/view?usp=drivesdk', // <-- UPDATE THIS WITH GOOGLE DRIVE LINK
     photo: 'https://files.catbox.moe/b84keh.jpg', // <-- YOUR PHOTO
     about:
       'Fullstack Developer with 6+ years building responsive web apps with React, JavaScript, Typescript,Node.js, Python, and Php,Java Spring Boot.I build scalable products that solve real problems for businesses in Nigeria and globally.',
@@ -212,8 +212,8 @@ function App() {
               LinkedIn
             </a>
             <a
-              href="https://drive.google.com/file/d/1IwSg3fYrlcwhFqMtDga3a_WzEifLDG4_/view?usp=drivesdk" 
-  target="_blank"
+              href={data.resum}
+               target="_blank"
                 border: `2px solid ${c.accent}`,
                 color: c.accent,
                 padding: '10px 20px',
