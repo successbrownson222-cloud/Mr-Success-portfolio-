@@ -213,7 +213,7 @@ function App() {
             </a>
             <a
               href={data.resume}
-               target="_blank"
+                target="_blank"
                 border: `2px solid ${c.accent}`,
                 color: c.accent,
                 padding: '10px 20px',
@@ -222,11 +222,9 @@ function App() {
                 fontWeight: 'bold',
               }}
             >
-              Download CV
             </a>
           </div>
         </header>
-
         <nav
           style={{
             display: 'flex',
