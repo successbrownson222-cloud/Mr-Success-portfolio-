@@ -24,7 +24,7 @@ function App() {
     resume: 'https://eu.wps.com/cms/docs/d/cbOaklj8TyUpAgNh?sa=601.1074', // <-- UPDATE THIS WITH GOOGLE DRIVE LINK
     photo: 'https://files.catbox.moe/b84keh.jpg', // <-- YOUR PHOTO
     about:
-      'Fullstack Developer with 6+ years building responsive web apps with React, JavaScript, Node.js, Python, and Php. I build scalable products that solve real problems for businesses in Nigeria and globally.',
+      'Fullstack Developer with 6+ years building responsive web apps with React, JavaScript, Typescript,Node.js, Python, and Php,Java Spring Boot.I build scalable products that solve real problems for businesses in Nigeria and globally.',
     skills: [
       { name: 'React.js', level: 90, category: 'Frontend' },
       { name: 'Javascript', level: 85, category: 'Frontend' },
