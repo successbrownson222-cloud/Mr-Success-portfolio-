@@ -212,7 +212,7 @@ function App() {
               LinkedIn
             </a>
             <a
-              href={data.resum}
+              href={data.resume}
                target="_blank"
                 border: `2px solid ${c.accent}`,
                 color: c.accent,
