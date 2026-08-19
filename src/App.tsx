@@ -222,6 +222,7 @@ function App() {
                 fontWeight: 'bold',
               }}
             >
+              Resume 
             </a>
           </div>
         </header>
