@@ -12,7 +12,7 @@ function App() {
   const [sent, setSent] = useState(false);
 
   const data = {
-    name: 'SUCCESS BROWNSON TEC',
+    name: 'SUCCESS BROWNSON TECH',
     role: 'Fullstack Developer',
     location: 'Abia, Nigeria',
     email: 'successbrownson222@gmail.com',
