@@ -76,7 +76,6 @@ function App() {
       },
     ],
   };
-
 {activeTab === 'blog' && (
   <section>
     <h2 style={{color: c.accent, fontSize: '28px'}}>Blog</h2>
