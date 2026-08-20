@@ -564,7 +564,7 @@ function App() {
               fontSize: '14px',
             }}
           >
-            © 2026 {data.name}. Built with React + Vite
+            © 2026 {data.name}. Built by Success 
           </p>
         </div>
       </footer>
