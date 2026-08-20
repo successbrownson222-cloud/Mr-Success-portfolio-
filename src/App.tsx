@@ -130,7 +130,7 @@ function App() {
     setTimeout(() => setSent(false), 3000);
     setFormData({ name: '', email: '', message: '' });
   };
-const style = {
+const c = colors{
   accent: '#6366f1',
   border: '#e5e7eb',
   card: '#ffffff',
