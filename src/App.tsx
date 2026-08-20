@@ -96,7 +96,7 @@ function App() {
       </p>
     </div>
   </section>
-)};
+)}
   const colors = {
     dark: {
       bg: '#000',
