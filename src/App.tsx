@@ -137,7 +137,7 @@ const c = colors{
   subtext: '#6b7280',
   text: '#111827',
   bg: '#f3f4f6'
-}
+};
   return (
     <div
       style={{
