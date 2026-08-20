@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Blog from './pages/Blog'
 
 function App() {
   const [activeTab, setActiveTab] = useState('about');
@@ -236,6 +237,7 @@ function App() {
             flexWrap: 'wrap',
           }}
         >
+<a href="/blog" style={{ color: 'white' }}>Blog</a>
           {['about', 'skills', 'projects', 'contact'].map((tab) => (
             <button
               key={tab}
