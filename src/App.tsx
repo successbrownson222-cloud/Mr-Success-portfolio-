@@ -76,7 +76,27 @@ function App() {
       },
     ],
   };
-
+{activeTab === 'blog' && (
+  <section>
+    <h2 style={{color: c.accent, fontSize: '28px'}}>Blog</h2>
+    <div style={{marginTop: '20px', padding: '20px', border: `1px solid ${c.border}`, borderRadius: '12px', backgroundColor: c.card}}>
+      <p style={{color: c.subtext, fontSize: '14px'}}>Aug 19, 2025</p>
+      <h3 style={{fontWeight: 'bold', fontSize: '20px', marginTop: '8px', color: c.text}}>
+        Debugging a Vercel Build Failure: JSX Inside a JS Object
+      </h3>
+      <p style={{color: c.subtext, marginTop: '8px'}}>
+        How a single typo + misplaced JSX caused a failed Vercel deployment and the exact fix.
+      </p>
+      <div style={{marginTop: '12px', backgroundColor: c.bg, padding: '12px', borderRadius: '8px', fontFamily: 'monospace', fontSize: '13px', color: c.text}}>
+        Error: Module parse failed: Unexpected token<br/>
+        Fix: Keep data pure. Don't put JSX in objects.
+      </div>
+      <p style={{color: c.subtext, marginTop: '12px'}}>
+        Full breakdown coming soon...
+      </p>
+    </div>
+  </section>
+)};
   const colors = {
     dark: {
       bg: '#000',
@@ -238,7 +258,7 @@ function App() {
           }}
         >
 <a href="/blog" style={{ color: 'white' }}>Blog</a>
-          {['about', 'skills', 'projects', 'contact'].map((tab) => (
+          {['about', 'skills', 'projects', 'blog', 'contact'].map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
