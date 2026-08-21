@@ -144,7 +144,6 @@ function App() {
                 onSubmit={() => setSent(true)}
                 style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}
               >
-                {/* REQUIRED: Your Access Key */}
                 <input type="hidden" name="access_key" value="cd0e0491-1653-48ff-bcbf-21a18b469a17" />
                 
                 <input type="hidden" name="subject" value="New Message from Portfolio" />
