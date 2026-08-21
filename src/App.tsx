@@ -174,11 +174,12 @@ function App() {
             </div>
             <div style={{ backgroundColor: c.border, borderRadius: '10px', height: '8px' }}>
               <div style={{ 
-                width: `${animateSkills ? skill.level : 0}%`, {/* 2. Animate from 0% */}
-                backgroundColor: c.accent, 
-                height: '8px', 
-                borderRadius: '10px',
-                transition: 'width 1.2s ease-out' {/* 3. Smooth animation */}
+  width: `${animateSkills? skill.level : 0}%`, 
+  backgroundColor: c.accent, 
+  height: '8px', 
+  borderRadius: '10px',
+  transition: 'width 1.2s ease-out'
+}}></div> {/* 3. Smooth animation */}
               }}></div>
             </div>
           </div>
