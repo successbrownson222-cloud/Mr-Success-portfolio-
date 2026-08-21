@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     if (activeTab === 'skills') {
-      setAnimateSkills(false) 
+      setAnimateSkills(false)
       const timer = setTimeout(() => setAnimateSkills(true), 100)
       return () => clearTimeout(timer)
     } else {
@@ -30,6 +30,7 @@ function App() {
     location: 'Abia, Nigeria',
     email: 'successbrownson222@gmail.com',
     phone: '+234 912 596 9210',
+    whatsapp: 'https://wa.me/2349125969210?text=Hi%20Success%20I%20saw%20your%20portfolio%20and%20I%20need%20a%20website', // <- Added this
     github: 'https://github.com/successbrownson222-cloud',
     linkedin: 'https://www.linkedin.com/in/success-brownson-290292418',
     twitter: 'https://twitter.com/',
@@ -103,6 +104,30 @@ function App() {
           <p style={{ marginTop: '30px', paddingTop: '20px', borderTop: `1px solid ${c.border}`, color: c.subtext, fontSize: '14px' }}>© 2026 {data.name}. Built by Success</p>
         </div>
       </footer>
+
+      {/* WHATSAPP FLOATING BUTTON */}
+      <a
+        href={data.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          backgroundColor: '#25D366',
+          color: 'white',
+          padding: '14px 18px',
+          borderRadius: '50px',
+          textDecoration: 'none',
+          fontWeight: 'bold',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+          zIndex: 999,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px'
+        }}>
+        💬 Chat Me
+      </a>
     </div>
   );
 }
