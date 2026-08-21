@@ -4,25 +4,18 @@ function App() {
   const [activeTab, setActiveTab] = useState('about');
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [filter, setFilter] = useState('All');
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
   const [sent, setSent] = useState(false);
 
   // Skill animation - FIXED for tabs
   const [animateSkills, setAnimateSkills] = useState(false)
 
-  // 1. Reset to 0% when you leave skills tab
-  // 2. Animate to 90% when you enter skills tab
   useEffect(() => {
     if (activeTab === 'skills') {
-      setAnimateSkills(false) // reset first
-      const timer = setTimeout(() => setAnimateSkills(true), 100) // then animate
+      setAnimateSkills(false) 
+      const timer = setTimeout(() => setAnimateSkills(true), 100)
       return () => clearTimeout(timer)
     } else {
-      setAnimateSkills(false) // reset when leaving
+      setAnimateSkills(false)
     }
   }, [activeTab])
 
@@ -70,13 +63,7 @@ function App() {
   const categories = ['All',...new Set(data.projects.map((p) => p.category))];
   const filteredProjects = filter === 'All'? data.projects : data.projects.filter((p) => p.category === filter);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    window.location.href = `mailto:${data.email}?subject=Portfolio Contact from ${formData.name}&body=${formData.message}%0A%0AFrom: ${formData.email}`;
-    setSent(true);
-    setTimeout(() => setSent(false), 3000);
-    setFormData({ name: '', email: '', message: '' });
-  };
+  // DELETED handleSubmit and formData - no longer needed
 
   return (
     <div style={{ backgroundColor: c.bg, color: c.text, minHeight: '100vh', fontFamily: 'system-ui, sans-serif', transition: 'all 0.3s' }}>
@@ -118,7 +105,7 @@ function App() {
                           backgroundColor: c.accent, 
                           height: '8px', 
                           borderRadius: '10px',
-                          transition: 'width 1.4s cubic-bezier(0.22, 1, 0.36, 1)' // smooth slide
+                          transition: 'width 1.4s cubic-bezier(0.22, 1, 0.36, 1)'
                         }}></div>
                       </div>
                     </div>
@@ -144,11 +131,55 @@ function App() {
             <section>
               <h2 style={{ color: c.accent, fontSize: '28px' }}>Contact Me</h2>
               <p style={{ color: c.subtext }}>Have a project in mind? Send me a message.</p>
-              <form onSubmit={handleSubmit} style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <input type="text" placeholder="Your Name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value })} required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} />
-                <input type="email" placeholder="Your Email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value })} required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} />
-                <textarea placeholder="Your Message" rows={4} value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value })} required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} />
-                <button type="submit" style={{ backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>{sent? 'Message Sent!' : 'Send Message'}</button>
+              
+              <form 
+                action="https://api.web3forms.com/submit" 
+                method="POST" 
+                onSubmit={() => setSent(true)}
+                style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}
+              >
+                {/* REQUIRED: Your Access Key - REPLACE THIS */}
+                <input type="hidden" name="access_key" value="cd0e0491-1653-48ff-bcbf-21a18b469a17" />
+                
+                <input type="hidden" name="subject" value="New Message from Portfolio" />
+                <input type="hidden" name="from_name" value="Portfolio Website" />
+
+                <input 
+                  type="text" 
+                  name="name"
+                  placeholder="Your Name" 
+                  required 
+                  style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} 
+                />
+                <input 
+                  type="email" 
+                  name="email"
+                  placeholder="Your Email" 
+                  required 
+                  style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} 
+                />
+                <textarea 
+                  name="message"
+                  placeholder="Your Message" 
+                  rows={4} 
+                  required 
+                  style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} 
+                />
+                <button 
+                  type="submit" 
+                  disabled={sent}
+                  style={{ 
+                    backgroundColor: sent? '#555' : c.accent, 
+                    color: theme === 'dark'? 'black' : 'white', 
+                    padding: '14px', 
+                    border: 'none', 
+                    borderRadius: '8px', 
+                    fontWeight: 'bold', 
+                    cursor: sent? 'not-allowed' : 'pointer' 
+                  }}
+                >
+                  {sent? 'Message Sent! ✓' : 'Send Message'}
+                </button>
               </form>
             </section>
           )}
