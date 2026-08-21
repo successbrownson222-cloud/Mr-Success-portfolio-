@@ -19,6 +19,14 @@ function App() {
     }
   }, [activeTab])
 
+  // Reset "Message Sent!" button after 3 seconds
+  useEffect(() => {
+    if (sent) {
+      const timer = setTimeout(() => setSent(false), 3000)
+      return () => clearTimeout(timer)
+    }
+  }, [sent])
+
   const data = {
     name: 'SUCCESS BROWNSON TECH',
     role: 'Fullstack Developer',
@@ -62,8 +70,6 @@ function App() {
 
   const categories = ['All',...new Set(data.projects.map((p) => p.category))];
   const filteredProjects = filter === 'All'? data.projects : data.projects.filter((p) => p.category === filter);
-
-  // DELETED handleSubmit and formData - no longer needed
 
   return (
     <div style={{ backgroundColor: c.bg, color: c.text, minHeight: '100vh', fontFamily: 'system-ui, sans-serif', transition: 'all 0.3s' }}>
@@ -138,11 +144,13 @@ function App() {
                 onSubmit={() => setSent(true)}
                 style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}
               >
-                {/* REQUIRED: Your Access Key - REPLACE THIS */}
+                {/* REQUIRED: Your Access Key */}
                 <input type="hidden" name="access_key" value="cd0e0491-1653-48ff-bcbf-21a18b469a17" />
                 
                 <input type="hidden" name="subject" value="New Message from Portfolio" />
                 <input type="hidden" name="from_name" value="Portfolio Website" />
+                {/* Stays on your site instead of redirecting */}
+                <input type="hidden" name="redirect" value="https://web3forms.com/success" />
 
                 <input 
                   type="text" 
