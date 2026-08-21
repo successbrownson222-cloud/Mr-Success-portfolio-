@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { PaystackButton } from 'react-paystack' // 1. Import this
 
 function App() {
   const [activeTab, setActiveTab] = useState('about');
@@ -6,6 +7,7 @@ function App() {
   const [filter, setFilter] = useState('All');
   const [sent, setSent] = useState(false);
   const [animateSkills, setAnimateSkills] = useState(false)
+  const [clientEmail, setClientEmail] = useState('') // 2. Added to collect email
 
   useEffect(() => {
     if (activeTab === 'skills') {
@@ -30,7 +32,8 @@ function App() {
     location: 'Abia, Nigeria',
     email: 'successbrownson222@gmail.com',
     phone: '+234 912 596 9210',
-    whatsapp: 'https://wa.me/2349125969210?text=Hi%20Success%20I%20saw%20your%20portfolio%20and%20I%20need%20a%20website', // <- Added this
+    whatsapp: 'https://wa.me/2349125969210?text=Hi%20Success%20I%20saw%20your%20portfolio%20and%20I%20need%20a%20website',
+    paystackKey: 'pk_test_yourkeyhere', // 3. Replace with your Paystack public key
     github: 'https://github.com/successbrownson222-cloud',
     linkedin: 'https://www.linkedin.com/in/success-brownson-290292418',
     twitter: 'https://twitter.com/',
@@ -68,6 +71,22 @@ function App() {
   const categories = ['All',...new Set(data.projects.map((p) => p.category))];
   const filteredProjects = filter === 'All'? data.projects : data.projects.filter((p) => p.category === filter);
 
+  // 4. Paystack config
+  const paystackConfig = {
+    reference: (new Date()).getTime().toString(),
+    email: clientEmail, // client enters email in form first
+    amount: 5000000, // ₦50,000 deposit. Paystack uses kobo so add 2 zeros
+    publicKey: data.paystackKey,
+  };
+
+  const handleSuccess = (reference) => {
+    alert(`Payment Successful! Ref: ${reference.reference}`);
+  };
+
+  const handleClose = () => {
+    alert('Payment window closed');
+  };
+
   return (
     <div style={{ backgroundColor: c.bg, color: c.text, minHeight: '100vh', fontFamily: 'system-ui, sans-serif', transition: 'all 0.3s' }}>
       <button onClick={() => setTheme(theme === 'dark'? 'light' : 'dark')} style={{ position: 'fixed', top: '20px', right: '20px', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', border: 'none', padding: '10px 16px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold', zIndex: 100 }}>
@@ -93,7 +112,50 @@ function App() {
           {activeTab === 'skills' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>My Skills</h2>{['Frontend', 'Backend', 'Database', 'DevOps'].map((cat) => (<div key={cat} style={{ marginTop: '24px' }}><h3>{cat}</h3>{data.skills.filter((s) => s.category === cat).map((skill) => (<div key={skill.name} style={{ marginTop: '12px' }}><div style={{ display: 'flex', justifyContent: 'space-between' }}><span>{skill.name}</span><span>{skill.level}%</span></div><div style={{ backgroundColor: c.border, borderRadius: '10px', height: '8px', overflow: 'hidden' }}><div style={{ width: `${animateSkills? skill.level : 0}%`, backgroundColor: c.accent, height: '8px', borderRadius: '10px', transition: 'width 1.4s cubic-bezier(0.22, 1, 0.36, 1)' }}></div></div></div>))}</div>))}</section>}
           {activeTab === 'projects' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Projects</h2><div style={{ display: 'flex', gap: '8px', marginTop: '16px', flexWrap: 'wrap' }}>{categories.map((cat) => (<button key={cat} onClick={() => setFilter(cat)} style={{ padding: '6px 14px', backgroundColor: filter === cat? c.accent : c.card, color: filter === cat? (theme === 'dark'? 'black' : 'white') : c.text, border: `1px solid ${c.border}`, borderRadius: '6px', cursor: 'pointer' }}>{cat}</button>))}</div>{filteredProjects.map((project) => (<div key={project.name} style={{ marginTop: '20px', padding: '20px', border: `1px solid ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}>{project.featured && <span style={{ backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', padding: '4px 10px', borderRadius: '4px', fontSize: '12px' }}>Featured</span>}<h3 style={{ fontWeight: 'bold', fontSize: '20px', marginTop: '8px' }}>{project.name}</h3><p style={{ fontSize: '14px', color: c.accent }}>{project.tech}</p><p style={{ color: c.subtext }}>{project.desc}</p><a href={project.link} style={{ color: c.accent, textDecoration: 'underline' }}>View Project →</a></div>))}</section>}
           {activeTab === 'blog' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Blog</h2><div style={{ marginTop: '20px', padding: '20px', border: `1px solid ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}><p style={{ color: c.subtext, fontSize: '14px' }}>Aug 19, 2025</p><h3 style={{ fontWeight: 'bold', fontSize: '20px', marginTop: '8px', color: c.text }}>Debugging a Vercel Build Failure</h3><p style={{ color: c.subtext, marginTop: '8px' }}>How a single typo caused a failed Vercel deployment.</p></div></section>}
-          {activeTab === 'contact' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Contact Me</h2><p style={{ color: c.subtext }}>Have a project in mind? Send me a message.</p><form action="https://api.web3forms.com/submit" method="POST" onSubmit={() => setSent(true)} style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}><input type="hidden" name="access_key" value="76d94847-2692-48b6-ad92-4819b1f2b838" /><input type="hidden" name="subject" value="New Message from Portfolio" /><input type="hidden" name="from_name" value="Portfolio Website" /><input type="hidden" name="redirect" value="https://web3forms.com/success" /><input type="text" name="name" placeholder="Your Name" required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><input type="email" name="email" placeholder="Your Email" required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><textarea name="message" placeholder="Your Message" rows={4} required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><button type="submit" disabled={sent} style={{ backgroundColor: sent? '#555' : c.accent, color: theme === 'dark'? 'black' : 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: sent? 'not-allowed' : 'pointer' }}>{sent? 'Message Sent! ✓' : 'Send Message'}</button></form></section>}
+
+          {activeTab === 'contact' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Contact Me</h2>
+          <p style={{ color: c.subtext }}>Have a project in mind? Send me a message or pay 50% deposit to get started.</p>
+
+          {/* CONTACT FORM */}
+          <form action="https://api.web3forms.com/submit" method="POST" onSubmit={() => setSent(true)} style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <input type="hidden" name="access_key" value="76d94847-2692-48b6-ad92-4819b1f2b838" />
+            <input type="hidden" name="subject" value="New Message from Portfolio" />
+            <input type="hidden" name="from_name" value="Portfolio Website" />
+            <input type="hidden" name="redirect" value="https://web3forms.com/success" />
+            <input type="text" name="name" placeholder="Your Name" required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} />
+            <input type="email" name="email" placeholder="Your Email" required onChange={(e) => setClientEmail(e.target.value)} style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} />
+            <textarea name="message" placeholder="Your Message" rows={4} required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} />
+            <button type="submit" disabled={sent} style={{ backgroundColor: sent? '#555' : c.accent, color: theme === 'dark'? 'black' : 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: sent? 'not-allowed' : 'pointer' }}>{sent? 'Message Sent! ✓' : 'Send Message'}</button>
+          </form>
+
+          {/* PAYSTACK BUTTON */}
+          <div style={{ marginTop: '20px', padding: '16px', border: `1px dashed ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}>
+            <h3 style={{ margin: '0 0 8px 0' }}>Ready to start?</h3>
+            <p style={{ color: c.subtext, fontSize: '14px', margin: '0 0 12px 0' }}>Pay ₦50,000 deposit to secure your project slot</p>
+            <input
+              type="email"
+              placeholder="Enter your email for receipt"
+              value={clientEmail}
+              onChange={(e) => setClientEmail(e.target.value)}
+              required
+              style={{ width: '100%', padding: '12px', backgroundColor: c.bg, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text, marginBottom: '12px', boxSizing: 'border-box' }}
+            />
+            {clientEmail? (
+              <PaystackButton
+                {...paystackConfig}
+                text="Pay ₦50,000 Deposit"
+                onSuccess={handleSuccess}
+                onClose={handleClose}
+                style={{ backgroundColor: '#00C853', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', width: '100%' }}
+              />
+            ) : (
+              <button disabled style={{ backgroundColor: '#555', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold', width: '100%' }}>
+                Enter email to pay
+              </button>
+            )}
+          </div>
+
+          </section>}
         </main>
       </div>
 
@@ -112,20 +174,20 @@ function App() {
         rel="noopener noreferrer"
         style={{
           position: 'fixed',
-          bottom: '16px', // was 20px
-          right: '16px', // was 20px
+          bottom: '16px',
+          right: '16px',
           backgroundColor: '#25D366',
           color: 'white',
-          padding: '10px 14px', // was 14px 18px - reduced top/bottom
+          padding: '10px 14px',
           borderRadius: '50px',
           textDecoration: 'none',
-          fontWeight: '600', // was bold
-          fontSize: '14px', // added smaller text
+          fontWeight: '600',
+          fontSize: '14px',
           boxShadow: '0 3px 10px rgba(0,0,0,0.25)',
           zIndex: 999,
           display: 'flex',
           alignItems: 'center',
-          gap: '6px' // was 8px
+          gap: '6px'
         }}>
         💬 Chat
       </a>
@@ -133,5 +195,4 @@ function App() {
      );
     }
 
-  
- export default App; 
+ export default App;
