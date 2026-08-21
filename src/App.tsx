@@ -105,31 +105,30 @@ function App() {
         </div>
       </footer>
 
-      {/* WHATSAPP FLOATING BUTTON */}
+      {/* WHATSAPP FLOATING BUTTON - SMALLER */}
       <a
         href={data.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
         style={{
           position: 'fixed',
-          bottom: '20px',
-          right: '20px',
+          bottom: '16px', // was 20px
+          right: '16px', // was 20px
           backgroundColor: '#25D366',
           color: 'white',
-          padding: '14px 18px',
+          padding: '10px 14px', // was 14px 18px - reduced top/bottom
           borderRadius: '50px',
           textDecoration: 'none',
-          fontWeight: 'bold',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+          fontWeight: '600', // was bold
+          fontSize: '14px', // added smaller text
+          boxShadow: '0 3px 10px rgba(0,0,0,0.25)',
           zIndex: 999,
           display: 'flex',
           alignItems: 'center',
-          gap: '8px'
+          gap: '6px' // was 8px
         }}>
-        💬 Chat Me
+        💬 Chat
       </a>
-    </div>
-  );
-}
-
-export default App;
+     </div>
+     );
+    }
