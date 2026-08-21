@@ -183,7 +183,7 @@ function App() {
           zIndex: 999,
           display: 'flex',
           alignItems: 'center',
-          gap: '6px'
+          gap: '6px',
         }}>
         💬 Chat
       </a>
