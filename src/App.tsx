@@ -179,7 +179,7 @@ function App() {
           textDecoration: 'none',
           fontWeight: '600',
           fontSize: '14px',
-       boxShadow: '0 3px 10px rgba(0,0,0,0.25)',
+          boxShadow: '0 3px 10px rgba(0,0,0,0.25)',
           zIndex: 999,
           display: 'flex',
           alignItems: 'center',
