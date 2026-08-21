@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function App() {
   const [activeTab, setActiveTab] = useState('about');
@@ -11,18 +11,20 @@ function App() {
   });
   const [sent, setSent] = useState(false);
 
-  // Skill animation
+  // Skill animation - FIXED for tabs
   const [animateSkills, setAnimateSkills] = useState(false)
-  const skillsRef = useRef<HTMLDivElement>(null)
 
+  // 1. Reset to 0% when you leave skills tab
+  // 2. Animate to 90% when you enter skills tab
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setAnimateSkills(entry.isIntersecting),
-      { threshold: 0.3 }
-    )
-    if (skillsRef.current) observer.observe(skillsRef.current)
-    return () => observer.disconnect()
-  }, [])
+    if (activeTab === 'skills') {
+      setAnimateSkills(false) // reset first
+      const timer = setTimeout(() => setAnimateSkills(true), 100) // then animate
+      return () => clearTimeout(timer)
+    } else {
+      setAnimateSkills(false) // reset when leaving
+    }
+  }, [activeTab])
 
   const data = {
     name: 'SUCCESS BROWNSON TECH',
@@ -100,7 +102,7 @@ function App() {
           {activeTab === 'about' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>About Me</h2><p style={{ color: c.subtext, lineHeight: '1.8' }}>{data.about}</p></section>}
 
           {activeTab === 'skills' && (
-            <section ref={skillsRef}>
+            <section>
               <h2 style={{ color: c.accent, fontSize: '28px' }}>My Skills</h2>
               {['Frontend', 'Backend', 'Database', 'DevOps'].map((cat) => (
                 <div key={cat} style={{ marginTop: '24px' }}>
@@ -110,8 +112,14 @@ function App() {
                       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <span>{skill.name}</span><span>{skill.level}%</span>
                       </div>
-                      <div style={{ backgroundColor: c.border, borderRadius: '10px', height: '8px' }}>
-                        <div style={{ width: `${animateSkills? skill.level : 0}%`, backgroundColor: c.accent, height: '8px', borderRadius: '10px', transition: 'width 1.2s ease-out' }}></div>
+                      <div style={{ backgroundColor: c.border, borderRadius: '10px', height: '8px', overflow: 'hidden' }}>
+                        <div style={{ 
+                          width: `${animateSkills? skill.level : 0}%`, 
+                          backgroundColor: c.accent, 
+                          height: '8px', 
+                          borderRadius: '10px',
+                          transition: 'width 1.4s cubic-bezier(0.22, 1, 0.36, 1)' // smooth slide
+                        }}></div>
                       </div>
                     </div>
                   ))}
