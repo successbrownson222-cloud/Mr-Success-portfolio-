@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { PaystackButton } from 'react-paystack' // 1. Import this
+import { PaystackButton } from 'react-paystack'
 
 function App() {
   const [activeTab, setActiveTab] = useState('about');
@@ -7,7 +7,7 @@ function App() {
   const [filter, setFilter] = useState('All');
   const [sent, setSent] = useState(false);
   const [animateSkills, setAnimateSkills] = useState(false)
-  const [clientEmail, setClientEmail] = useState('') // 2. Added to collect email
+  const [clientEmail, setClientEmail] = useState('')
 
   useEffect(() => {
     if (activeTab === 'skills') {
@@ -33,7 +33,7 @@ function App() {
     email: 'successbrownson222@gmail.com',
     phone: '+234 912 596 9210',
     whatsapp: 'https://wa.me/2349125969210?text=Hi%20Success%20I%20saw%20your%20portfolio%20and%20I%20need%20a%20website',
-    paystackKey: 'pk_test_yourkeyhere', // 3. Replace with your Paystack public key
+    paystackKey: 'pk_test_48465c9101ef5216a9d976b8ae4260493b45984c', // YOUR KEY
     github: 'https://github.com/successbrownson222-cloud',
     linkedin: 'https://www.linkedin.com/in/success-brownson-290292418',
     twitter: 'https://twitter.com/',
@@ -71,15 +71,14 @@ function App() {
   const categories = ['All',...new Set(data.projects.map((p) => p.category))];
   const filteredProjects = filter === 'All'? data.projects : data.projects.filter((p) => p.category === filter);
 
-  // 4. Paystack config
   const paystackConfig = {
     reference: (new Date()).getTime().toString(),
-    email: clientEmail, // client enters email in form first
-    amount: 5000000, // ₦50,000 deposit. Paystack uses kobo so add 2 zeros
+    email: clientEmail,
+    amount: 5000000, // ₦50,000. Paystack uses kobo
     publicKey: data.paystackKey,
   };
 
-  const handleSuccess = (reference) => {
+  const handleSuccess = (reference: any) => {
     alert(`Payment Successful! Ref: ${reference.reference}`);
   };
 
@@ -116,7 +115,6 @@ function App() {
           {activeTab === 'contact' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Contact Me</h2>
           <p style={{ color: c.subtext }}>Have a project in mind? Send me a message or pay 50% deposit to get started.</p>
 
-          {/* CONTACT FORM */}
           <form action="https://api.web3forms.com/submit" method="POST" onSubmit={() => setSent(true)} style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <input type="hidden" name="access_key" value="76d94847-2692-48b6-ad92-4819b1f2b838" />
             <input type="hidden" name="subject" value="New Message from Portfolio" />
@@ -128,7 +126,6 @@ function App() {
             <button type="submit" disabled={sent} style={{ backgroundColor: sent? '#555' : c.accent, color: theme === 'dark'? 'black' : 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: sent? 'not-allowed' : 'pointer' }}>{sent? 'Message Sent! ✓' : 'Send Message'}</button>
           </form>
 
-          {/* PAYSTACK BUTTON */}
           <div style={{ marginTop: '20px', padding: '16px', border: `1px dashed ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}>
             <h3 style={{ margin: '0 0 8px 0' }}>Ready to start?</h3>
             <p style={{ color: c.subtext, fontSize: '14px', margin: '0 0 12px 0' }}>Pay ₦50,000 deposit to secure your project slot</p>
@@ -167,7 +164,6 @@ function App() {
         </div>
       </footer>
 
-      {/* WHATSAPP FLOATING BUTTON - SMALLER */}
       <a
         href={data.whatsapp}
         target="_blank"
