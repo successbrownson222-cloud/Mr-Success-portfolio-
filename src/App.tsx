@@ -145,10 +145,8 @@ function App() {
                 style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}
               >
                 <input type="hidden" name="access_key" value="cd0e0491-1653-48ff-bcbf-21a18b469a17" />
-                
                 <input type="hidden" name="subject" value="New Message from Portfolio" />
                 <input type="hidden" name="from_name" value="Portfolio Website" />
-                {/* Stays on your site instead of redirecting */}
                 <input type="hidden" name="redirect" value="https://web3forms.com/success" />
 
                 <input 
