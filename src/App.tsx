@@ -49,8 +49,8 @@ function App() {
       { name: 'Java Spring Boot', level: 69, category: 'Backend' },
       { name: 'PostgreSQL', level: 80, category: 'Database' },
       { name: 'MongoDB', level: 85, category: 'Database' },
-      { name: 'Docker', level: 65, category: 'DevOps' },
-      { name: 'Git', level: 90, category: 'DevOps' },
+      { name: 'Docker', level: 75, category: 'DevOps' },
+      { name: 'Git', level: 92, category: 'DevOps' },
     ],
     projects: [
       { name: 'Aba Market E-commerce', tech: 'React.js, Node.js, MongoDB', category: 'Fullstack', desc: 'E-commerce platform connecting 200+ Aba vendors to customers with Paystack integration.', link: '#', featured: true },
