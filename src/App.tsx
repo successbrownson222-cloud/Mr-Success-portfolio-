@@ -33,7 +33,7 @@ function App() {
     email: 'successbrownson222@gmail.com',
     phone: '+234 912 596 9210',
     whatsapp: 'https://wa.me/2349125969210?text=Hi%20Success%20I%20saw%20your%20portfolio%20and%20I%20need%20a%20website',
-    paystackKey: 'pk_test_48465c9101ef5216a9d976b8ae4260493b45984c', // YOUR KEY
+    paystackKey: 'pk_test_48465c9101ef5216a9d976b8ae4260493b45984c',
     github: 'https://github.com/successbrownson222-cloud',
     linkedin: 'https://www.linkedin.com/in/success-brownson-290292418',
     twitter: 'https://twitter.com/',
@@ -74,7 +74,7 @@ function App() {
   const paystackConfig = {
     reference: (new Date()).getTime().toString(),
     email: clientEmail,
-    amount: 5000000, // ₦50,000. Paystack uses kobo
+    amount: 5000000,
     publicKey: data.paystackKey,
   };
 
@@ -179,7 +179,7 @@ function App() {
           textDecoration: 'none',
           fontWeight: '600',
           fontSize: '14px',
-          boxShadow: '0 3px 10px rgba(0,0,0,0.25)',
+          boxShadow: '0 3px 10px rgba(0,0,0.25)',
           zIndex: 999,
           display: 'flex',
           alignItems: 'center',
