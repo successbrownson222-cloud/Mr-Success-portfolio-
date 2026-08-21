@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import React, { useMemo, useState, useEffect, useRef } from 'react'
 
 function App() {
   const [activeTab, setActiveTab] = useState('about');
@@ -10,6 +11,23 @@ function App() {
     message: '',
   });
   const [sent, setSent] = useState(false);
+
+  // NEW: Skill animation - PUT IT HERE
+  const [animateSkills, setAnimateSkills] = useState(false)
+  const skillsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setAnimateSkills(entry.isIntersecting),
+      { threshold: 0.3 }
+    )
+    if (skillsRef.current) observer.observe(skillsRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  const c = useMemo(() => dark? { bg:'#0a0a0a', card:'#111', text:'#fff', muted:'#aaa', border:'#222', accent:'#22c55e'} : { bg:'#fff', card:'#f7f7f7', text:'#111', muted:'#555', border:'#e5e5e5', accent:'#16a34a'}, [dark])
+
+  //...rest of your code
 
   const data = {
     name: 'SUCCESS BROWNSON TECH',
@@ -143,27 +161,32 @@ function App() {
           )}
 
           {activeTab === 'skills' && (
-            <section>
-              <h2 style={{ color: c.accent, fontSize: '28px' }}>My Skills</h2>
-              {['Frontend', 'Backend', 'Database', 'DevOps'].map((cat) => (
-                <div key={cat} style={{ marginTop: '24px' }}>
-                  <h3>{cat}</h3>
-                  {data.skills.filter((s) => s.category === cat).map((skill) => (
-                    <div key={skill.name} style={{ marginTop: '12px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span>{skill.name}</span>
-                        <span>{skill.level}%</span>
-                      </div>
-                      <div style={{ backgroundColor: c.border, borderRadius: '10px', height: '8px' }}>
-                        <div style={{ width: `${skill.level}%`, backgroundColor: c.accent, height: '8px', borderRadius: '10px' }}></div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </section>
-          )}
-
+  <section ref={skillsRef}> {/* 1. Added ref here */}
+    <h2 style={{ color: c.accent, fontSize: '28px' }}>My Skills</h2>
+    {['Frontend', 'Backend', 'Database', 'DevOps'].map((cat) => (
+      <div key={cat} style={{ marginTop: '24px' }}>
+        <h3>{cat}</h3>
+        {data.skills.filter((s) => s.category === cat).map((skill) => (
+          <div key={skill.name} style={{ marginTop: '12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <span>{skill.name}</span>
+              <span>{skill.level}%</span>
+            </div>
+            <div style={{ backgroundColor: c.border, borderRadius: '10px', height: '8px' }}>
+              <div style={{ 
+                width: `${animateSkills ? skill.level : 0}%`, {/* 2. Animate from 0% */}
+                backgroundColor: c.accent, 
+                height: '8px', 
+                borderRadius: '10px',
+                transition: 'width 1.2s ease-out' {/* 3. Smooth animation */}
+              }}></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    ))}
+  </section>
+)}
           {activeTab === 'projects' && (
             <section>
               <h2 style={{ color: c.accent, fontSize: '28px' }}>Projects</h2>
