@@ -12,7 +12,7 @@
   "dependencies": {
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-paystack": "^4.0.2"
+    "react-paystack": "^5.0.3"
   },
   "devDependencies": {
     "@types/node": "^24.13.3",
