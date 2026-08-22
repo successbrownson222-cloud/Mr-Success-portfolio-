@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-// @ts-ignore
+
 const payWithPaystack = (email) => {
   // @ts-ignore
   let handler = PaystackPop.setup({
