@@ -107,6 +107,22 @@ function App() {
           <h1 style={{ color: c.accent, fontSize: '42px', fontWeight: 'bold', margin: 0, lineHeight: '1.1' }}>SUCCESS <br /> BROWNSON TECH</h1>
           <p style={{ fontSize: '20px', color: c.subtext, marginTop: '8px' }}>{data.role}</p>
           <p style={{ color: c.subtext }}>{data.location}</p>
+
+          {/* SOCIAL BUTTONS - GitHub, LinkedIn, Resume */}
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '16px', flexWrap: 'wrap' }}>
+            <a href={data.github} target="_blank" rel="noopener noreferrer" 
+               style={{ padding: '10px 16px', backgroundColor: '#24292e', color: 'white', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}>
+               GitHub
+            </a>
+            <a href={data.linkedin} target="_blank" rel="noopener noreferrer" 
+               style={{ padding: '10px 16px', backgroundColor: '#0077b5', color: 'white', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}>
+               LinkedIn
+            </a>
+            <a href={data.resume} target="_blank" rel="noopener noreferrer" 
+               style={{ padding: '10px 16px', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}>
+               📄 Resume
+            </a>
+          </div>
         </header>
 
         <nav style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '40px', flexWrap: 'wrap' }}>
