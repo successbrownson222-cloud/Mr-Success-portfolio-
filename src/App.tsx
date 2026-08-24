@@ -16,44 +16,31 @@ const payWithPaystack = (email: string, paystackKey: string) => {
     currency: 'NGN',
     ref: '' + Math.floor(Math.random() * 1000000 + 1),
     callback: function (response: any) {
-      // ===== WHATSAPP ALERT START =====
-      const amount = "₦50,000";
-      const reference = response.reference;
-      const clientEmail = email;
-
-      const token = "65op9rsm718xe23g";
-      const instance = "189319";
-      const myPhone = "2349125969210"; // Your number without +
-
-      const message = `🔥 NEW DEPOSIT RECEIVED!
+  // 1. Get payment details
+  const amount = "₦50,000";
+  const reference = response.reference;
+  const clientEmail = email;
+  
+  // 2. Your UltraMSG details
+  const token = "65op9rsm718xe23g";
+  const instance = "189319";
+  const myPhone = "2349125969210"; // No +
+  
+  const message = `🔥 NEW DEPOSIT RECEIVED!
 
 Amount: ${amount}
 Reference: ${reference}
 Client: ${clientEmail}
 Date: ${new Date().toLocaleString("en-NG")}`;
 
-      fetch(`https://api.ultramsg.com/${instance}/messages/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          token: token,
-          to: myPhone,
-          body: message
-        })
-      })
-     .then(res => console.log("WhatsApp Alert Sent!", res))
-     .catch(err => console.log("WhatsApp Error:", err));
-      // ===== WHATSAPP ALERT END =====
+ // 3. Send WhatsApp using GET - this bypasses 
+  const url = `https://api.ultramsg.com/${instance}/messages/chat?token=${token}&to=${myPhone}&body=${encodeURIComponent(message)}`;
+  new Image().src = url; // This sends it instantly
 
-      alert('Payment complete! Reference: ' + response.reference);
-      window.location.href = `/payment/success?ref=${reference}`; // Optional redirect
-    },
-    onClose: function () {
-      alert('Window closed');
-    },
-  });
-  handler.openIframe();
-};
+  // 4. Continue normal flow
+  alert('Payment complete! Reference: ' + response.reference);
+  window.location.href = `/payment/success?ref=${reference}`;
+}
 
 function App() {
   const [activeTab, setActiveTab] = useState('about');
