@@ -37,14 +37,19 @@ Date: ${new Date().toLocaleString("en-NG")}`;
       const url = `https://api.ultramsg.com/${instance}/messages/chat?token=${token}&to=${myPhone}&body=${encodeURIComponent(message)}`;
       new Image().src = url; // This sends it instantly
 
-      // 4. Continue normal flow
-      alert('Payment complete! Reference: ' + response.reference);
-      window.location.href = `/payment/success?ref=${reference}`;
-    }, // <-- THIS WAS MISSING
+      console.log("WhatsApp Alert Triggered:", url);
+
+      // 4. Wait 1.5 seconds before redirect so WhatsApp can send
+      setTimeout(() => {
+        alert('Payment complete! Reference: ' + response.reference);
+        window.location.href = `/payment/success?ref=${reference}`;
+      }, 1500);
+      
+    },
     onClose: function () {
       alert('Window closed');
     },
-  }); // <-- THIS WAS MISSING
+  });
   handler.openIframe();
 };
 
