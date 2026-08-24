@@ -16,7 +16,37 @@ const payWithPaystack = (email: string, paystackKey: string) => {
     currency: 'NGN',
     ref: '' + Math.floor(Math.random() * 1000000 + 1),
     callback: function (response: any) {
+      // ===== WHATSAPP ALERT START =====
+      const amount = "₦50,000";
+      const reference = response.reference;
+      const clientEmail = email;
+
+      const token = "65op9rsm718xe23g";
+      const instance = "189319";
+      const myPhone = "2349125969210"; // Your number without +
+
+      const message = `🔥 NEW DEPOSIT RECEIVED!
+
+Amount: ${amount}
+Reference: ${reference}
+Client: ${clientEmail}
+Date: ${new Date().toLocaleString("en-NG")}`;
+
+      fetch(`https://api.ultramsg.com/${instance}/messages/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: token,
+          to: myPhone,
+          body: message
+        })
+      })
+     .then(res => console.log("WhatsApp Alert Sent!", res))
+     .catch(err => console.log("WhatsApp Error:", err));
+      // ===== WHATSAPP ALERT END =====
+
       alert('Payment complete! Reference: ' + response.reference);
+      window.location.href = `/payment/success?ref=${reference}`; // Optional redirect
     },
     onClose: function () {
       alert('Window closed');
@@ -108,17 +138,16 @@ function App() {
           <p style={{ fontSize: '20px', color: c.subtext, marginTop: '8px' }}>{data.role}</p>
           <p style={{ color: c.subtext }}>{data.location}</p>
 
-          {/* SOCIAL BUTTONS - GitHub, LinkedIn, Resume */}
           <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '16px', flexWrap: 'wrap' }}>
-            <a href={data.github} target="_blank" rel="noopener noreferrer" 
+            <a href={data.github} target="_blank" rel="noopener noreferrer"
                style={{ padding: '10px 16px', backgroundColor: '#24292e', color: 'white', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}>
                GitHub
             </a>
-            <a href={data.linkedin} target="_blank" rel="noopener noreferrer" 
+            <a href={data.linkedin} target="_blank" rel="noopener noreferrer"
                style={{ padding: '10px 16px', backgroundColor: '#0077b5', color: 'white', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}>
                LinkedIn
             </a>
-            <a href={data.resume} target="_blank" rel="noopener noreferrer" 
+            <a href={data.resume} target="_blank" rel="noopener noreferrer"
                style={{ padding: '10px 16px', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}>
                📄 Resume
             </a>
