@@ -591,4 +591,43 @@ function App() {
           <p
             style={{
               marginTop: '30px',
-              paddingTop: '20
+              paddingTop: '20px',
+              borderTop: `1px solid ${c.border}`,
+              color: c.subtext,
+              fontSize: '14px',
+            }}
+          >
+            © 2026 {data.name}. Built by Success
+          </p>
+        </div>
+      </footer>
+
+      <a
+        href={data.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          position: 'fixed',
+          bottom: '16px',
+          right: '16px',
+          backgroundColor: '#25D366',
+          color: 'white',
+          padding: '10px 14px',
+          borderRadius: '50px',
+          textDecoration: 'none',
+          fontWeight: '600',
+          fontSize: '14px',
+          boxShadow: '0 3px 10px rgba(0,0,0,0.25)',
+          zIndex: 999,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px',
+        }}
+      >
+        💬 Chat
+      </a>
+    </div>
+  );
+}
+
+export default App;
