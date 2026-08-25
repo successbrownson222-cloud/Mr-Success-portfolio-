@@ -42,7 +42,7 @@ function App() {
   const [animateSkills, setAnimateSkills] = useState(false);
   const [clientEmail, setClientEmail] = useState('');
 
- // TAWK LIVE CHAT
+// TAWK LIVE CHAT - Hidden bubble, opens on your button click
 useEffect(() => {
   const script = document.createElement("script");
   script.async = true;
@@ -58,11 +58,8 @@ useEffect(() => {
   script.onload = () => {
     // @ts-ignore
     window.Tawk_API?.onLoad?.(() => {
-      // Push Tawk bubble up so it doesn't overlap your Chat button
-      setTimeout(() => {
-        const iframe = document.querySelector('iframe[src*="tawk"]') as HTMLElement;
-        if(iframe) iframe.style.bottom = '90px';
-      }, 1000);
+      // HIDE THE TAWK BUBBLE
+      window.Tawk_API.hideWidget();
     });
   };
 }, []);
