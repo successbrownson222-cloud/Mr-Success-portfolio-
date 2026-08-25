@@ -42,7 +42,7 @@ function App() {
   const [animateSkills, setAnimateSkills] = useState(false);
   const [clientEmail, setClientEmail] = useState('');
 
-  // TAWK LIVE CHAT 
+ // TAWK LIVE CHAT
 useEffect(() => {
   const script = document.createElement("script");
   script.async = true;
@@ -51,30 +51,20 @@ useEffect(() => {
   script.setAttribute('crossorigin', '*');
   
   const firstScript = document.getElementsByTagName("script")[0];
-  if (firstScript && firstScript.parentNode) {
+  if (firstScript?.parentNode) {
     firstScript.parentNode.insertBefore(script, firstScript);
   }
 
-  // 2. Configure Tawk after it loads
   script.onload = () => {
     // @ts-ignore
-    if (window.Tawk_API) {
-      window.Tawk_API.onLoad = function(){
-        // Change bubble color to match your green brand
-        window.Tawk_API.setAttributes({
-          'name': 'Visitor',
-          'email': '',
-        }, function(error){});
-        
-        // Move Tawk bubble up so it doesn't clash with your Chat button
-        const tawkButton = document.querySelector('iframe[src*="tawk"]');
-        if(tawkButton){
-          tawkButton.style.bottom = '90px'; // pushes it up
-        }
-      };
-    }
+    window.Tawk_API?.onLoad?.(() => {
+      // Push Tawk bubble up so it doesn't overlap your Chat button
+      setTimeout(() => {
+        const iframe = document.querySelector('iframe[src*="tawk"]') as HTMLElement;
+        if(iframe) iframe.style.bottom = '90px';
+      }, 1000);
+    });
   };
-  
 }, []);
 
   useEffect(() => {
