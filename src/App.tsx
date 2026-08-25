@@ -41,15 +41,15 @@ function App() {
       { name: 'Docker', level: 75, category: 'DevOps' }, { name: 'Git', level: 92, category: 'DevOps' },
     ],
     projects: [
-      { name: 'Aba Market E-commerce', tech: 'React.js, Node.js, MongoDB', category: 'Fullstack', desc: 'E-commerce platform connecting 200+ Aba vendors to customers.', link: '#', featured: true },
+      { name: 'Aba Market E-commerce', tech: 'React.js, Node.js, MongoDB', category: 'Fullstack', desc: 'E-commerce platform connecting 200 plus Aba vendors to customers.', link: '#', featured: true },
       { name: 'Spring Boot Banking API', tech: 'Java, Spring Boot, PostgreSQL', category: 'Backend', desc: 'Secure REST APIs for mobile banking app with JWT auth.', link: '#', featured: true },
       { name: 'Portfolio Dashboard', tech: 'React.js, Python, FastAPI', category: 'Fullstack', desc: 'Admin dashboard to manage content and view analytics.', link: '#', featured: false },
       { name: 'Weather App', tech: 'React.js, Tailwind', category: 'Frontend', desc: 'Real-time weather app with location search.', link: '#', featured: false },
     ],
     pricing: [
-      { name: 'Starter', price: '₦400,000', desc: 'Perfect for small businesses & portfolios', features: ['5 Page Responsive Website', 'WhatsApp Integration', 'Contact Form + Email', '1 Month Support', 'Basic SEO'], popular: false },
-      { name: 'Business', price: '₦900,000', desc: 'Best for e-commerce & serious brands', features: ['Up to 15 Pages', 'E-commerce Integration', 'Admin Dashboard', '3 Months Support', 'Speed Optimization'], popular: true },
-      { name: 'Enterprise', price: '₦2,000,000+', desc: 'Custom web apps & business systems', features: ['Custom Web Application', 'API Development', 'Database Design', '6 Months Support', '24hr Support'], popular: false },
+      { name: 'Starter', price: '₦400,000', desc: 'Perfect for small businesses and portfolios', features: ['5 Page Responsive Website', 'WhatsApp Integration', 'Contact Form and Email', '1 Month Support', 'Basic SEO'], popular: false },
+      { name: 'Business', price: '₦900,000', desc: 'Best for e-commerce and serious brands', features: ['Up to 15 Pages', 'E-commerce with Paystack and Paypal', 'Admin Dashboard and Analytics', '3 Months Support', 'Speed Optimization'], popular: true },
+      { name: 'Enterprise', price: '₦2,000,000+', desc: 'Custom web apps and business systems', features: ['Custom Web Application', 'API Development and Integration', 'Database Design and Security', '6 Months Support', '24hr Priority Support'], popular: false },
     ]
   };
 
@@ -95,7 +95,6 @@ function App() {
       </div>
       <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px' }}><div style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px', textAlign: 'center' }}><h3 style={{ color: c.accent, fontSize: '20px' }}>{data.name}</h3><p style={{ color: c.subtext }}>{data.role} based in {data.location}</p><p style={{ marginTop: '30px', paddingTop: '20px', borderTop: `1px solid ${c.border}`, color: c.subtext, fontSize: '14px' }}>© 2026 {data.name}. Built by Success</p></div></footer>
     
-      {/* WhatsApp button - Bottom Left */}
       <a href={data.whatsapp} target="_blank" rel="noopener noreferrer" style={{ position: 'fixed', bottom: '16px', left: '16px', backgroundColor: '#25D366', color: 'white', padding: '10px 14px', borderRadius: '50px', textDecoration: 'none', fontWeight: '600', fontSize: '14px', boxShadow: '0 3px 10px rgba(0,0,0,0.25)', zIndex: 999, display: 'flex', alignItems: 'center', gap: '6px' }}>💬 Chat</a>
     </div>
   );
