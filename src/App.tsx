@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-const payWithPaystack = (email) => {
+const payWithPaystack = (email, key) => {
   // @ts-ignore
   let handler = PaystackPop.setup({
-    key: 'pk_test_2c4b5a2d0f4f5c8a7b9e1d3f5a7b9c1d3e5f7a9b',
+    key: key,
     email: email,
-    amount: 100000, // 1000 NGN
+    amount: 5000000, // 50000 NGN in kobo
     currency: 'NGN',
-    ref: '' + Math.floor(Math.random() * 1000000000 + 1),
+    ref: '' + Math.floor(Math.random() * 1000000 + 1),
     callback: function (response) {
       alert('Payment complete! Reference: ' + response.reference);
     },
@@ -18,7 +18,7 @@ const payWithPaystack = (email) => {
 };
 function App() {
   const [activeTab, setActiveTab] = useState('about');
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [theme, setTheme] = useState('dark'); // REMOVED THE TYPE HERE
   const [filter, setFilter] = useState('All');
   const [sent, setSent] = useState(false);
   const [animateSkills, setAnimateSkills] = useState(false);
@@ -125,13 +125,13 @@ function App() {
       accent: '#16a34a',
       border: '#e5e7eb',
     },
-  } as const;
+  };
 
   const c = colors[theme];
-  const categories = ['All', ...new Set(data.projects.map((p) => p.category))];
+  const categories = ['All',...new Set(data.projects.map((p) => p.category))];
   const filteredProjects =
     filter === 'All'
-      ? data.projects
+     ? data.projects
       : data.projects.filter((p) => p.category === filter);
   return (
     <div
@@ -144,13 +144,13 @@ function App() {
       }}
     >
       <button
-        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        onClick={() => setTheme(theme === 'dark'? 'light' : 'dark')}
         style={{
           position: 'fixed',
           top: '20px',
           right: '20px',
           backgroundColor: c.accent,
-          color: theme === 'dark' ? 'black' : 'white',
+          color: theme === 'dark'? 'black' : 'white',
           border: 'none',
           padding: '10px 16px',
           borderRadius: '50px',
@@ -159,7 +159,7 @@ function App() {
           zIndex: 100,
         }}
       >
-        {theme === 'dark' ? '☀️' : '🌙'}
+        {theme === 'dark'? '☀️' : '🌙'}
       </button>
 
       <div
@@ -210,14 +210,14 @@ function App() {
               onClick={() => setActiveTab(tab)}
               style={{
                 padding: '10px 20px',
-                backgroundColor: activeTab === tab ? c.accent : 'transparent',
+                backgroundColor: activeTab === tab? c.accent : 'transparent',
                 color:
                   activeTab === tab
-                    ? theme === 'dark'
-                      ? 'black'
+                   ? theme === 'dark'
+                     ? 'black'
                       : 'white'
                     : c.subtext,
-                border: `1px solid ${activeTab === tab ? c.accent : c.border}`,
+                border: `1px solid ${activeTab === tab? c.accent : c.border}`,
                 borderRadius: '8px',
                 cursor: 'pointer',
                 fontWeight: 'bold',
@@ -245,8 +245,8 @@ function App() {
                 <div key={cat} style={{ marginTop: '24px' }}>
                   <h3>{cat}</h3>
                   {data.skills
-                    .filter((s) => s.category === cat)
-                    .map((skill) => (
+                   .filter((s) => s.category === cat)
+                   .map((skill) => (
                       <div key={skill.name} style={{ marginTop: '12px' }}>
                         <div
                           style={{
@@ -267,7 +267,7 @@ function App() {
                         >
                           <div
                             style={{
-                              width: `${animateSkills ? skill.level : 0}%`,
+                              width: `${animateSkills? skill.level : 0}%`,
                               backgroundColor: c.accent,
                               height: '8px',
                               borderRadius: '10px',
@@ -299,11 +299,11 @@ function App() {
                     onClick={() => setFilter(cat)}
                     style={{
                       padding: '6px 14px',
-                      backgroundColor: filter === cat ? c.accent : c.card,
+                      backgroundColor: filter === cat? c.accent : c.card,
                       color:
                         filter === cat
-                          ? theme === 'dark'
-                            ? 'black'
+                         ? theme === 'dark'
+                           ? 'black'
                             : 'white'
                           : c.text,
                       border: `1px solid ${c.border}`,
@@ -330,7 +330,7 @@ function App() {
                     <span
                       style={{
                         backgroundColor: c.accent,
-                        color: theme === 'dark' ? 'black' : 'white',
+                        color: theme === 'dark'? 'black' : 'white',
                         padding: '4px 10px',
                         borderRadius: '4px',
                         fontSize: '12px',
@@ -477,16 +477,16 @@ function App() {
                   type="submit"
                   disabled={sent}
                   style={{
-                    backgroundColor: sent ? '#555' : c.accent,
-                    color: theme === 'dark' ? 'black' : 'white',
+                    backgroundColor: sent? '#555' : c.accent,
+                    color: theme === 'dark'? 'black' : 'white',
                     padding: '14px',
                     border: 'none',
                     borderRadius: '8px',
                     fontWeight: 'bold',
-                    cursor: sent ? 'not-allowed' : 'pointer',
+                    cursor: sent? 'not-allowed' : 'pointer',
                   }}
                 >
-                  {sent ? 'Message Sent! ✓' : 'Send Message'}
+                  {sent? 'Message Sent! ✓' : 'Send Message'}
                 </button>
               </form>
 
@@ -526,9 +526,9 @@ function App() {
                     boxSizing: 'border-box',
                   }}
                 />
-                {clientEmail ? (
+                {clientEmail? (
                   <button
-                    onClick={() => payWithPaystack(clientEmail)}
+                    onClick={() => payWithPaystack(clientEmail, data.paystackKey)}
                     style={{
                       backgroundColor: '#00C853',
                       color: 'white',
@@ -561,7 +561,7 @@ function App() {
                     Enter email to pay
                   </button>
                 )}
-                
+
               </div>
             </section>
           )}
@@ -590,43 +590,6 @@ function App() {
           <p
             style={{
               marginTop: '30px',
-              paddingTop: '20px', 
+              paddingTop: '20px',
               borderTop: `1px solid ${c.border}`,
-              color: c.subtext,
-              fontSize: '14px',
-            }}
-          >
-            © 2026 {data.name}. Built by Success
-          </p>
-        </div>
-      </footer>
-
-      <a
-        href={data.whatsapp}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          position: 'fixed',
-          bottom: '16px',
-          right: '16px',
-          backgroundColor: '#25D366',
-          color: 'white',
-          padding: '10px 14px',
-          borderRadius: '50px',
-          textDecoration: 'none',
-          fontWeight: '600',
-          fontSize: '14px',
-          boxShadow: '0 3px 10px rgba(0,0,0,0.25)',
-          zIndex: 999,
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px',
-        }}
-      >
-        💬 Chat
-      </a>
-    </div>
-  );
-}
-
-export default App;
+              
