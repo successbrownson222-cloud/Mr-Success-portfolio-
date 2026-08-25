@@ -16,7 +16,7 @@ function App() {
     } else {
       setAnimateSkills(false);
     }
-  }, [activeTab]);
+  }, [activeTab]); 
 
   useEffect(() => {
     if (sent) {
