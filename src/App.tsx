@@ -42,7 +42,8 @@ function App() {
   const [animateSkills, setAnimateSkills] = useState(false);
   const [clientEmail, setClientEmail] = useState('');
 
-  useEffect(() => {
+  // TAWK LIVE CHAT
+useEffect(() => {
   var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
   var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
   s1.async=true;
