@@ -7,46 +7,29 @@ const payWithPaystack = (email: string, paystackKey: string) => {
     alert("Paystack is still loading. Please refresh and try again.")
     return
   }
-
   // @ts-ignore
   let handler = window.PaystackPop.setup({
     key: paystackKey,
     email: email,
-    amount: 5000000, // ₦50,000 * 100 = kobo
+    amount: 5000000, // ₦50,000 deposit
     currency: 'NGN',
     ref: '' + Math.floor(Math.random() * 1000000 + 1),
     callback: function (response: any) {
-      // 1. Get payment details
       const amount = "₦50,000";
       const reference = response.reference;
       const clientEmail = email;
-      
-      // 2. Your UltraMSG details
       const token = "65op9rsm718xe23g";
       const instance = "189319";
       const myPhone = "2349125969210";
-      
-      const message = `🔥 NEW DEPOSIT RECEIVED!
-
-Amount: ${amount}
-Reference: ${reference}
-Client: ${clientEmail}
-Date: ${new Date().toLocaleString("en-NG")}`;
-
-      // 3. Send WhatsApp using GET
+      const message = `🔥 NEW DEPOSIT RECEIVED!\n\nAmount: ${amount}\nReference: ${reference}\nClient: ${clientEmail}\nDate: ${new Date().toLocaleString("en-NG")}`;
       const url = `https://api.ultramsg.com/${instance}/messages/chat?token=${token}&to=${myPhone}&body=${encodeURIComponent(message)}`;
       new Image().src = url;
-
-      // 4. Wait 1.5 seconds before redirect
       setTimeout(() => {
         alert('Payment complete! Reference: ' + response.reference);
         window.location.href = `/payment/success?ref=${reference}`;
       }, 1500);
-      
     },
-    onClose: function () {
-      alert('Window closed');
-    },
+    onClose: function () { alert('Window closed'); },
   });
   handler.openIframe();
 };
@@ -60,13 +43,16 @@ function App() {
   const [clientEmail, setClientEmail] = useState('');
 
   useEffect(() => {
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/1d0000/1default'; // REPLACE WITH YOUR TAWK ID
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
+    // TS Safe Tawk.to
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = 'https://embed.tawk.to/1d0000/1default'; // REPLACE WITH YOUR TAWK ID
+    script.charset = 'UTF-8';
+    script.setAttribute('crossorigin', '*');
+    const firstScript = document.getElementsByTagName("script")[0];
+    if (firstScript && firstScript.parentNode) {
+      firstScript.parentNode.insertBefore(script, firstScript);
+    }
   }, []);
 
   useEffect(() => {
@@ -151,7 +137,7 @@ function App() {
           {activeTab === 'about' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>About Me</h2><p style={{ color: c.subtext, lineHeight: '1.8' }}>{data.about}</p></section>}
           {activeTab === 'skills' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>My Skills</h2>{['Frontend', 'Backend', 'Database', 'DevOps'].map((cat) => (<div key={cat} style={{ marginTop: '24px' }}><h3>{cat}</h3>{data.skills.filter((s) => s.category === cat).map((skill) => (<div key={skill.name} style={{ marginTop: '12px' }}><div style={{ display: 'flex', justifyContent: 'space-between' }}><span>{skill.name}</span><span>{skill.level}%</span></div><div style={{ backgroundColor: c.border, borderRadius: '10px', height: '8px', overflow: 'hidden' }}><div style={{ width: `${animateSkills? skill.level : 0}%`, backgroundColor: c.accent, height: '8px', borderRadius: '10px', transition: 'width 1.4s cubic-bezier(0.22, 1, 0.36, 1)' }}></div></div></div>))}</div>))}</section>}
           {activeTab === 'projects' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Projects</h2><div style={{ display: 'flex', gap: '8px', marginTop: '16px', flexWrap: 'wrap' }}>{categories.map((cat) => (<button key={cat} onClick={() => setFilter(cat)} style={{ padding: '6px 14px', backgroundColor: filter === cat? c.accent : c.card, color: filter === cat? theme === 'dark'? 'black' : 'white' : c.text, border: `1px solid ${c.border}`, borderRadius: '6px', cursor: 'pointer' }}>{cat}</button>))}</div>{filteredProjects.map((project) => (<div key={project.name} style={{ marginTop: '20px', padding: '20px', border: `1px solid ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}>{project.featured && (<span style={{ backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', padding: '4px 10px', borderRadius: '4px', fontSize: '12px' }}>Featured</span>)}<h3 style={{ fontWeight: 'bold', fontSize: '20px', marginTop: '8px' }}>{project.name}</h3><p style={{ fontSize: '14px', color: c.accent }}>{project.tech}</p><p style={{ color: c.subtext }}>{project.desc}</p><a href={data.whatsapp} style={{ color: c.accent, textDecoration: 'underline' }}>Discuss Project →</a></div>))}</section>}
-          {activeTab === 'pricing' && (<section><h2 style={{ color: c.accent, fontSize: '28px', textAlign: 'center' }}>My Pricing Packages</h2><p style={{ color: c.subtext, textAlign: 'center', marginBottom: '32px' }}>Premium quality. 50% deposit to start.</p><div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>{data.pricing.map((pkg) => (<div key={pkg.name} style={{ padding: '24px', border: pkg.popular ? `2px solid ${c.accent}` : `1px solid ${c.border}`, borderRadius: '16px', backgroundColor: c.card, position: 'relative', transform: pkg.popular ? 'scale(1.05)' : 'scale(1)' }}>{pkg.popular && <span style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', padding: '4px 16px', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold' }}>MOST POPULAR</span>}<h3 style={{ fontSize: '24px', margin: '8px 0' }}>{pkg.name}</h3><p style={{ fontSize: '32px', fontWeight: 'bold', color: c.accent, margin: '8px 0' }}>{pkg.price}</p><p style={{ color: c.subtext, fontSize: '14px', marginBottom: '16px' }}>{pkg.desc}</p><ul style={{ listStyle: 'none', padding: 0, margin: '0 0 20px 0' }}>{pkg.features.map((f) => <li key={f} style={{ marginBottom: '8px' }}>✅ {f}</li>)}</ul><a href={data.whatsapp} style={{ display: 'block', textAlign: 'center', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', padding: '12px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>Get Started</a></div>))}</div></section>)}
+          {activeTab === 'pricing' && (<section><h2 style={{ color: c.accent, fontSize: '28px', textAlign: 'center' }}>My Pricing Packages</h2><p style={{ color: c.subtext, textAlign: 'center', marginBottom: '32px' }}>Premium quality. 50% deposit to start.</p><div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>{data.pricing.map((pkg) => (<div key={pkg.name} style={{ padding: '24px', border: pkg.popular? `2px solid ${c.accent}` : `1px solid ${c.border}`, borderRadius: '16px', backgroundColor: c.card, position: 'relative', transform: pkg.popular? 'scale(1.05)' : 'scale(1)' }}>{pkg.popular && <span style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', padding: '4px 16px', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold' }}>MOST POPULAR</span>}<h3 style={{ fontSize: '24px', margin: '8px 0' }}>{pkg.name}</h3><p style={{ fontSize: '32px', fontWeight: 'bold', color: c.accent, margin: '8px 0' }}>{pkg.price}</p><p style={{ color: c.subtext, fontSize: '14px', marginBottom: '16px' }}>{pkg.desc}</p><ul style={{ listStyle: 'none', padding: 0, margin: '0 0 20px 0' }}>{pkg.features.map((f) => <li key={f} style={{ marginBottom: '8px' }}>✅ {f}</li>)}</ul><a href={data.whatsapp} style={{ display: 'block', textAlign: 'center', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', padding: '12px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>Get Started</a></div>))}</div></section>)}
           {activeTab === 'blog' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Blog</h2><div style={{ marginTop: '20px', padding: '20px', border: `1px solid ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}><p style={{ color: c.subtext, fontSize: '14px' }}>Aug 19, 2025</p><h3 style={{ fontWeight: 'bold', fontSize: '20px', marginTop: '8px', color: c.text }}>Debugging a Vercel Build Failure</h3><p style={{ color: c.subtext, marginTop: '8px' }}>How a single typo caused a failed Vercel deployment.</p></div></section>}
           {activeTab === 'contact' && (<section><h2 style={{ color: c.accent, fontSize: '28px' }}>Contact Me</h2><p style={{ color: c.subtext }}>Have a project in mind? Send me a message or pay 50% deposit to get started.</p><form action="https://api.web3forms.com/submit" method="POST" onSubmit={() => setSent(true)} style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}><input type="hidden" name="access_key" value="76d94847-2692-48b6-ad92-4819b1f2b838" /><input type="hidden" name="subject" value="New Message from Portfolio" /><input type="hidden" name="from_name" value="Portfolio Website" /><input type="hidden" name="redirect" value="https://web3forms.com/success" /><input type="text" name="name" placeholder="Your Name" required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><input type="email" name="email" placeholder="Your Email" required onChange={(e) => setClientEmail(e.target.value)} style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><textarea name="message" placeholder="Your Message" rows={4} required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><button type="submit" disabled={sent} style={{ backgroundColor: sent? '#555' : c.accent, color: theme === 'dark'? 'black' : 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: sent? 'not-allowed' : 'pointer' }}>{sent? 'Message Sent! ✓' : 'Send Message'}</button></form><div style={{ marginTop: '20px', padding: '16px', border: `1px dashed ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}><h3 style={{ margin: '0 0 8px 0' }}>Ready to start?</h3><p style={{ color: c.subtext, fontSize: '14px', margin: '0 0 12px 0' }}>Pay ₦50,000 deposit to secure your project slot</p><input type="email" placeholder="Enter your email for receipt" value={clientEmail} onChange={(e) => setClientEmail(e.target.value)} required style={{ width: '100%', padding: '12px', backgroundColor: c.bg, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text, marginBottom: '12px', boxSizing: 'border-box' }} />{clientEmail? (<button onClick={() => payWithPaystack(clientEmail, data.paystackKey)} style={{ backgroundColor: '#00C853', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: 'pointer' }}>Pay ₦50,000 Deposit</button>) : (<button disabled style={{ backgroundColor: '#555', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: 'not-allowed' }}>Enter email to pay</button>)}</div></section>)}
         </main>
