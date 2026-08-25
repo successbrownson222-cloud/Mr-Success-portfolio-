@@ -43,16 +43,24 @@ function App() {
   const [clientEmail, setClientEmail] = useState('');
 
   useEffect(() => {
-  // Tawk.to Live Chat
+  // @ts-ignore
+  window.Tawk_API = window.Tawk_API || {};
+  // @ts-ignore
+  window.Tawk_LoadStart = new Date();
+  
   const script = document.createElement("script");
   script.async = true;
-  script.src = 'https://embed.tawk.to/6a8d55b056fb1f343f885360/1'; // YOUR REAL ID
+  script.src = 'https://embed.tawk.to/6a8d55b056fb1f343f885360/1';
   script.charset = 'UTF-8';
   script.setAttribute('crossorigin', '*');
-  const firstScript = document.getElementsByTagName("script")[0];
-  if (firstScript && firstScript.parentNode) {
-    firstScript.parentNode.insertBefore(script, firstScript);
-  }
+  document.head.appendChild(script);
+  
+  // Force widget to front
+  // @ts-ignore
+  window.Tawk_API.onLoad = function(){
+    // @ts-ignore
+    window.Tawk_API.setAttributes({ zIndex: 9999 }, function(error){});
+  };
 }, []);
 
   useEffect(() => {
