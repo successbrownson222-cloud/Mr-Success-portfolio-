@@ -42,31 +42,15 @@ function App() {
   const [animateSkills, setAnimateSkills] = useState(false);
   const [clientEmail, setClientEmail] = useState('');
 
-  // TAWK LIVE CHAT - ONLY ONCE
   useEffect(() => {
-    // @ts-ignore
-    window.Tawk_API = window.Tawk_API || {};
-    // @ts-ignore
-    window.Tawk_LoadStart = new Date();
-    
-    (function(){
-      var s1 = document.createElement("script");
-      var s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = 'https://embed.tawk.to/6a8d55b056fb1f343f885360/1';
-      s1.charset = 'UTF-8';
-      s1.setAttribute('crossorigin', '*');
-      if (s0 && s0.parentNode) { // <-- SAFETY CHECK ADDED
-        s0.parentNode.insertBefore(s1, s0);
-      }
-    })();
-    
-    // @ts-ignore
-    window.Tawk_API.onLoad = function(){
-      // @ts-ignore
-      window.Tawk_API.showWidget();
-    };
-  }, []);
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6a8dada374bc52344a108b9a/1k0smsi31';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+}, []);
 
   useEffect(() => {
     if (activeTab === 'skills') {
