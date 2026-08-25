@@ -3,11 +3,7 @@ import { useState, useEffect } from 'react';
 // FIX ALL TS ERRORS
 declare global {
   interface Window {
-    Tawk_API?: {
-      hideWidget: () => void;
-      maximize: () => void;
-      onLoad: (cb: () => void) => void;
-    };
+    Tawk_API?: any; 
     PaystackPop?: any;
   }
 }
