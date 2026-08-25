@@ -42,9 +42,8 @@ function App() {
   const [animateSkills, setAnimateSkills] = useState(false);
   const [clientEmail, setClientEmail] = useState('');
 
-  // TAWK LIVE CHAT - Perfect Setup
+  // TAWK LIVE CHAT 
 useEffect(() => {
-  // 1. Create and load Tawk script
   const script = document.createElement("script");
   script.async = true;
   script.src = 'https://embed.tawk.to/6a8dada374bc52344a108b9a/1k0smsi31';
