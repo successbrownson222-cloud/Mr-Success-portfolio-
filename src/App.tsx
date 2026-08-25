@@ -7,7 +7,7 @@ const payWithPaystack = (email: string, paystackKey: string) => {
     alert("Paystack is still loading. Please refresh and try again.")
     return
   }
-  // @ts-ignore
+
   const handler = window.PaystackPop.setup({
     key: paystackKey,
     email: email,
