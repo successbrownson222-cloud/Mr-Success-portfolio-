@@ -7,34 +7,46 @@ const payWithPaystack = (email: string, paystackKey: string) => {
     alert("Paystack is still loading. Please refresh and try again.")
     return
   }
+
   // @ts-ignore
   let handler = window.PaystackPop.setup({
     key: paystackKey,
     email: email,
-    amount: 5000000, // ₦50,000 deposit
+    amount: 5000000, // ₦50,000 * 100 = kobo
     currency: 'NGN',
     ref: '' + Math.floor(Math.random() * 1000000 + 1),
     callback: function (response: any) {
+      // 1. Get payment details
       const amount = "₦50,000";
       const reference = response.reference;
       const clientEmail = email;
+      
+      // 2. Your UltraMSG details
       const token = "65op9rsm718xe23g";
       const instance = "189319";
       const myPhone = "2349125969210";
+      
       const message = `🔥 NEW DEPOSIT RECEIVED!
 
 Amount: ${amount}
 Reference: ${reference}
 Client: ${clientEmail}
 Date: ${new Date().toLocaleString("en-NG")}`;
+
+      // 3. Send WhatsApp using GET
       const url = `https://api.ultramsg.com/${instance}/messages/chat?token=${token}&to=${myPhone}&body=${encodeURIComponent(message)}`;
-      new Image().src = url; 
+      new Image().src = url;
+
+      // 4. Wait 1.5 seconds before redirect
       setTimeout(() => {
         alert('Payment complete! Reference: ' + response.reference);
         window.location.href = `/payment/success?ref=${reference}`;
       }, 1500);
+      
     },
-    onClose: function () { alert('Window closed'); },
+    onClose: function () {
+      alert('Window closed');
+    },
   });
   handler.openIframe();
 };
