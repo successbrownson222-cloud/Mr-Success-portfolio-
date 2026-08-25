@@ -28,7 +28,7 @@ function App() {
     linkedin: 'https://www.linkedin.com/in/success-brownson-290292418',
     resume: 'https://drive.google.com/file/d/1IwSg3fYrlcwhFqMtDga3a_WzEifLDG4_/view?usp=drivesdk',
     photo: 'https://files.catbox.moe/b84keh.jpg',
-    about: 'Fullstack Developer with 6 plus years building responsive web apps with React, JavaScript, Typescript, Node.js, Python, and Php, Java Spring Boot. I build scalable products that solve real problems for businesses in Nigeria and globally.',
+    about: 'Fullstack Developer with 6 plus years building responsive web apps with React, JavaScript, Typescript, Node.js, Python, and Php, Java Spring Boot.',
     skills: [
       { name: 'React.js', level: 90, category: 'Frontend' }, { name: 'Javascript', level: 85, category: 'Frontend' },
       { name: 'TypeScript', level: 80, category: 'Frontend' }, { name: 'Node.js', level: 85, category: 'Backend' },
@@ -51,7 +51,7 @@ function App() {
   };
 
   const c = theme === 'dark' 
-  ? { bg: '#000', card: '#111', text: '#fff', subtext: '#9ca3af', accent: '#22c55e', border: '#374151' }
+ ? { bg: '#000', card: '#111', text: '#fff', subtext: '#9ca3af', accent: '#22c55e', border: '#374151' }
     : { bg: '#f9fafb', card: '#fff', text: '#111', subtext: '#4b5563', accent: '#16a34a', border: '#e5e7eb' };
 
   const categories = ['All',...new Set(data.projects.map((p) => p.category))];
@@ -59,7 +59,7 @@ function App() {
 
   return (
     <div style={{ backgroundColor: c.bg, color: c.text, minHeight: '100vh' }}>
-      <button onClick={() => setTheme(theme === 'dark'? 'light' : 'dark')} style={{ position: 'fixed', top: '20px', right: '20px', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', border: 'none', padding: '10px 16px', borderRadius: '50px', cursor: 'pointer' }}>
+      <button onClick={() => setTheme(theme === 'dark'? 'light' : 'dark')} style={{ position: 'fixed', top: '20px', right: '20px', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', border: 'none', padding: '10px 16px', borderRadius: '50px' }}>
         {theme === 'dark'? 'Light Mode' : 'Dark Mode'}
       </button>
       
@@ -67,31 +67,24 @@ function App() {
         <header style={{ textAlign: 'center' }}>
           <img src={data.photo} alt={data.name} style={{ width: '140px', height: '140px', borderRadius: '50%', border: `4px solid ${c.accent}` }} />
           <h1 style={{ color: c.accent, fontSize: '42px' }}>SUCCESS BROWNSON TECH</h1>
-          <p style={{ color: c.subtext }}>{data.role}</p>
-          <p style={{ color: c.subtext }}>{data.location}</p>
-          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
-            <a href={data.github} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 16px', backgroundColor: '#24292e', color: 'white', borderRadius: '8px', textDecoration: 'none' }}>GitHub</a>
-            <a href={data.linkedin} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 16px', backgroundColor: '#0077b5', color: 'white', borderRadius: '8px', textDecoration: 'none' }}>LinkedIn</a>
-            <a href={data.resume} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 16px', backgroundColor: c.accent, color: 'black', borderRadius: '8px', textDecoration: 'none' }}>Resume</a>
-          </div>
+          <p>{data.role}</p>
+          <p>{data.location}</p>
         </header>
 
         <nav style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginTop: '40px' }}>
           {['about', 'skills', 'projects', 'pricing', 'contact'].map((tab) => (
-            <button key={tab} onClick={() => setActiveTab(tab)} style={{ padding: '10px 20px', backgroundColor: activeTab === tab? c.accent : 'transparent', color: activeTab === tab? 'black' : c.subtext, border: `1px solid ${c.border}`, borderRadius: '8px' }}>{tab}</button>
+            <button key={tab} onClick={() => setActiveTab(tab)}>{tab}</button>
           ))}
         </nav>
 
-        {activeTab === 'about' && <section><h2 style={{ color: c.accent }}>About Me</h2><p style={{ color: c.subtext }}>{data.about}</p></section>}
-        
-        {activeTab === 'projects' && <section><h2 style={{ color: c.accent }}>Projects</h2><div>{categories.map((cat) => (<button key={cat} onClick={() => setFilter(cat)}>{cat}</button>))}</div>{filteredProjects.map((project) => (<div key={project.name}><h3>{project.name}</h3><p>{project.tech}</p><p>{project.desc}</p><a href={data.whatsapp}>Discuss Project</a></div>))}</section>}
-        
-        {activeTab === 'pricing' && <section><h2 style={{ color: c.accent }}>Pricing</h2>{data.pricing.map((pkg) => (<div key={pkg.name}><h3>{pkg.name}</h3><p>{pkg.price}</p><ul>{pkg.features.map((f) => <li key={f}>{f}</li>)}</ul><a href={data.whatsapp}>Get Started on WhatsApp</a></div>))}</section>}
-
-        {activeTab === 'contact' && <section><h2 style={{ color: c.accent }}>Contact Me</h2><form action="https://api.web3forms.com/submit" method="POST" onSubmit={() => setSent(true)}><input type="hidden" name="access_key" value="76d94847-2692-48b6-ad92-4819b1f2b838" /><input name="name" placeholder="Your Name" required /><input name="email" placeholder="Your Email" required /><textarea name="message" placeholder="Your Message" required /><button disabled={sent}>{sent? 'Message Sent' : 'Send Message'}</button></form></section>}
+        {activeTab === 'about' && <section><h2>About Me</h2><p>{data.about}</p></section>}
+        {activeTab === 'skills' && <section><h2>Skills</h2>{data.skills.map((s) => <div key={s.name}>{s.name}: {s.level}%</div>)}</section>}
+        {activeTab === 'projects' && <section><h2>Projects</h2>{filteredProjects.map((p) => <div key={p.name}><h3>{p.name}</h3><p>{p.desc}</p></div>)}</section>}
+        {activeTab === 'pricing' && <section><h2>Pricing</h2>{data.pricing.map((pkg) => <div key={pkg.name}><h3>{pkg.name}</h3><p>{pkg.price}</p></div>)}</section>}
+        {activeTab === 'contact' && <section><h2>Contact</h2><form action="https://api.web3forms.com/submit" method="POST" onSubmit={() => setSent(true)}><input type="hidden" name="access_key" value="76d94847-2692-48b6-ad92-4819b1f2b838" /><input name="name" required /><button>{sent? 'Sent' : 'Send'}</button></form></section>}
       </div>
       
-      <a href={data.whatsapp} target="_blank" rel="noopener noreferrer" style={{ position: 'fixed', bottom: '16px', left: '16px', backgroundColor: '#25D366', color: 'white', padding: '10px 14px', borderRadius: '50px', textDecoration: 'none' }}>Chat</a>
+      <a href={data.whatsapp} target="_blank" rel="noopener noreferrer">Chat</a>
     </div>
   );
 }
