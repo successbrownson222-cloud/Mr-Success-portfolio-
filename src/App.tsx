@@ -42,27 +42,28 @@ function App() {
   const [animateSkills, setAnimateSkills] = useState(false);
   const [clientEmail, setClientEmail] = useState('');
 
+  // TAWK LIVE CHAT - ONLY ONCE
   useEffect(() => {
-  // @ts-ignore
-  window.Tawk_API = window.Tawk_API || {};
-  // @ts-ignore
-  window.Tawk_LoadStart = new Date();
-  
-  (function(){
-    var s1 = document.createElement("script"),s0 = document.getElementsByTagName("script")[0];
-    s1.async = true;
-    s1.src = 'https://embed.tawk.to/6a8d55b056fb1f343f885360/1';
-    s1.charset = 'UTF-8';
-    s1.setAttribute('crossorigin', '*');
-    s0.parentNode.insertBefore(s1,s0);
-  })();
-  
-  // @ts-ignore
-  window.Tawk_API.onLoad = function(){
     // @ts-ignore
-    window.Tawk_API.showWidget();
-  };
-}, []);
+    window.Tawk_API = window.Tawk_API || {};
+    // @ts-ignore
+    window.Tawk_LoadStart = new Date();
+    
+    (function(){
+      var s1 = document.createElement("script"),s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/6a8d55b056fb1f343f885360/1'; // YOUR PROPERTY ID
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1,s0);
+    })();
+    
+    // @ts-ignore
+    window.Tawk_API.onLoad = function(){
+      // @ts-ignore
+      window.Tawk_API.showWidget();
+    };
+  }, []); // <-- ONLY ONE useEffect for Tawk
 
   useEffect(() => {
     if (activeTab === 'skills') {
@@ -152,7 +153,9 @@ function App() {
         </main>
       </div>
       <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px' }}><div style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px', textAlign: 'center' }}><h3 style={{ color: c.accent, fontSize: '20px' }}>{data.name}</h3><p style={{ color: c.subtext }}>{data.role} based in {data.location}</p><p style={{ marginTop: '30px', paddingTop: '20px', borderTop: `1px solid ${c.border}`, color: c.subtext, fontSize: '14px' }}>© 2026 {data.name}. Built by Success</p></div></footer>
-    <a href={data.whatsapp} target="_blank" rel="noopener noreferrer" style={{ position: 'fixed', bottom: '16px', left: '16px', backgroundColor: '#25D366', color: 'white', padding: '10px 14px', borderRadius: '50px', textDecoration: 'none', fontWeight: '600', fontSize: '14px', boxShadow: '0 3px 10px rgba(0,0,0,0.25)', zIndex: 999, display: 'flex', alignItems: 'center', gap: '6px' }}>💬 Chat</a>
+    
+     // {/* WhatsApp button - Bottom Left */}
+      <a href={data.whatsapp} target="_blank" rel="noopener noreferrer" style={{ position: 'fixed', bottom: '16px', left: '16px', backgroundColor: '#25D366', color: 'white', padding: '10px 14px', borderRadius: '50px', textDecoration: 'none', fontWeight: '600', fontSize: '14px', boxShadow: '0 3px 10px rgba(0,0,0,0.25)', zIndex: 999, display: 'flex', alignItems: 'center', gap: '6px' }}>💬 Chat</a>
     </div>
   );
 }
