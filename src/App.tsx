@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
 
-// FIX TS ERROR: Tell TS about Tawk and Paystack
+// FIX ALL TS ERRORS
 declare global {
   interface Window {
     Tawk_API?: {
       hideWidget: () => void;
       maximize: () => void;
-      onLoad: () => void;
+      onLoad: (cb: () => void) => void;
     };
     PaystackPop?: any;
   }
 }
 
-// @ts-ignore
 const payWithPaystack = (email: string, paystackKey: string) => {
   if (!window.PaystackPop) {
     alert("Paystack is still loading. Please refresh and try again.")
@@ -21,7 +20,7 @@ const payWithPaystack = (email: string, paystackKey: string) => {
   let handler = window.PaystackPop.setup({
     key: paystackKey,
     email: email,
-    amount: 5000000, // ₦50,000 deposit
+    amount: 5000000,
     currency: 'NGN',
     ref: '' + Math.floor(Math.random() * 1000000 + 1),
     callback: function (response: any) {
@@ -52,7 +51,7 @@ function App() {
   const [animateSkills, setAnimateSkills] = useState(false);
   const [clientEmail, setClientEmail] = useState('');
 
-  // TAWK LIVE CHAT - Hidden bubble, opens on your button click
+  // TAWK LIVE CHAT
   useEffect(() => {
     const script = document.createElement("script");
     script.async = true;
@@ -63,7 +62,6 @@ function App() {
 
     script.onload = () => {
       window.Tawk_API?.onLoad?.(() => {
-        // HIDE THE TAWK BUBBLE
         window.Tawk_API?.hideWidget();
       });
     };
