@@ -42,7 +42,7 @@ function App() {
   const [animateSkills, setAnimateSkills] = useState(false);
   const [clientEmail, setClientEmail] = useState('');
 
-// TAWK LIVE CHAT - Hidden bubble, opens on your button click
+// TAWK LIVE CHAT 
 useEffect(() => {
   const script = document.createElement("script");
   script.async = true;
