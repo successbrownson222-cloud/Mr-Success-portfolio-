@@ -591,7 +591,7 @@ function App() {
             style={{
               marginTop: '30px',
               paddingTop: '20px',
-             borderTop: `1px solid ${c.border}`,
+            borderTop: `1px solid ${c.border}`,
               color: c.subtext,
               fontSize: '14px',
             }}
