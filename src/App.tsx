@@ -78,9 +78,9 @@ function App() {
       { name: 'Weather App', tech: 'React.js, Tailwind', category: 'Frontend', desc: 'Real-time weather app with location search and 7-day forecast.', link: '#', featured: false },
     ],
     pricing: [
-      { name: 'Basic Website', price: '₦150,000', features: ['5 Pages Responsive', 'Contact Form', '1 Month Support', 'Fast Delivery 7 Days'], popular: false },
-      { name: 'Business Website', price: '₦350,000', features: ['10 Pages Responsive', 'Blog + CMS', 'Paystack Integration', 'SEO + 3 Months Support'], popular: true },
-      { name: 'E-commerce + Web App', price: '₦750,000', features: ['Unlimited Products', 'Admin Dashboard', 'Payment + Delivery', '6 Months Support + Maintenance'], popular: false },
+      { name: 'Starter Website', price: '₦250,000', features: ['5 Pages Responsive', 'Contact Form + WhatsApp', 'Basic SEO Setup', '1 Month Support', 'Delivery: 7 Days'], popular: false },
+      { name: 'Business Website', price: '₦550,000', features: ['10 Pages Responsive', 'Blog + CMS', 'Paystack Integration', 'Admin Dashboard', 'Advanced SEO + 3 Months Support'], popular: true },
+      { name: 'E-commerce + Web App', price: '₦1,200,000', features: ['Unlimited Products', 'Custom Admin + Analytics', 'Paystack + Delivery Integration', 'Mobile Responsive', '6 Months Support + Maintenance'], popular: false },
     ]
   };
 
