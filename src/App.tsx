@@ -16,7 +16,7 @@ function App() {
     } else {
       setAnimateSkills(false);
     }
-  }, [activeTab]); 
+  }, [activeTab]);
 
   useEffect(() => {
     if (sent) {
@@ -82,12 +82,12 @@ function App() {
   const colors = {
     dark: { bg: '#000', card: '#111', text: '#fff', subtext: '#9ca3af', accent: '#22c55e', border: '#374151' },
     light: { bg: '#f9fafb', card: '#fff', text: '#111', subtext: '#4b5563', accent: '#16a34a', border: '#e5e7eb' },
-  } as const; // <-- THIS FIXES TS7053
+  } as const;
 
-  const c = colors[theme as keyof typeof colors]; // <-- THIS ALSO FIXES TS7053
+  const c = colors[theme as keyof typeof colors];
   const categories = ['All',...new Set(data.projects.map((p) => p.category))];
   const filteredProjects = filter === 'All'? data.projects : data.projects.filter((p) => p.category === filter);
-
+  
   return (
     <div style={{ backgroundColor: c.bg, color: c.text, minHeight: '100vh', fontFamily: 'system-ui, sans-serif', transition: 'all 0.3s' }}>
       <button onClick={() => setTheme(theme === 'dark'? 'light' : 'dark')} style={{ position: 'fixed', top: '20px', right: '20px', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', border: 'none', padding: '10px 16px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold', zIndex: 100 }}>
