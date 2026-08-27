@@ -152,7 +152,7 @@ function App() {
         </main>
       </div>
 
-      <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px' }}>
+     <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px', paddingBottom: '80px' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px', textAlign: 'center' }}>
           <h3 style={{ color: c.accent, fontSize: '20px' }}>{data.name}</h3>
           <p style={{ color: c.subtext }}>{data.role} based in {data.location}</p>
