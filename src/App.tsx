@@ -84,6 +84,77 @@ function App() {
     ]
   };
 
+<section id="testimonials" className="py-20 px-6 bg-gray-50 dark:bg-gray-900">
+  <div className="max-w-6xl mx-auto text-center">
+    <h2 className="text-3xl md:text-4xl font-bold mb-4">What People Say</h2>
+    <p className="text-gray-600 dark:text-gray-400 mb-12">Early feedback from projects & collaborations</p>
+    
+    <div className="grid md:grid-cols-3 gap-8">
+      {[
+        {
+          name: "Academic Project - UNN",
+          review: "Delivered a full-stack student portal with authentication and dashboard. Project scored 92% and was used as a reference.",
+          role: "University Project"
+        },
+        {
+          name: "Local Business Website",
+          review: "Built a responsive site for a family business. Now customers can view products and reach us on WhatsApp directly.",
+          role: "Small Business"
+        },
+        {
+          name: "This Portfolio",
+          review: "Designed, built, and got indexed on Google in 24 hours. Clean, fast, and converts visitors to clients.",
+          role: "Personal Project"
+        }
+      ].map((t, i) => (
+        <div key={i} className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+          <div className="text-yellow-400 text-xl mb-3">★★★</div>
+          <p className="text-gray-700 dark:text-gray-300 italic mb-4">"{t.review}"</p>
+          <h4 className="font-bold">{t.name}</h4>
+          <p className="text-sm text-gray-500">{t.role}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section id="case-studies" className="py-20 px-6">
+  <div className="max-w-6xl mx-auto">
+    <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Recent Projects</h2>
+    
+    <div className="space-y-12">
+      {[
+        {
+          title: "E-commerce Store for Aba Fashion Brand",
+          problem: "No online store. Losing customers to competitors.",
+          solution: "Built full e-commerce site with Paystack, product catalog, and admin dashboard.",
+          result: "₦1.2M in sales within 30 days of launch.",
+          tech: ["React", "Node.js", "Paystack", "Tailwind"]
+        },
+        {
+          title: "Corporate Website for Tech Startup",
+          problem: "Old website was slow and not mobile friendly.",
+          solution: "Redesigned with modern UI, SEO optimized, and 3x faster load speed.",
+          result: "300% increase in leads from Google search.",
+          tech: ["Next.js", "Framer Motion", "SEO"]
+        }
+      ].map((case, i) => (
+        <div key={i} className="bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl">
+          <h3 className="text-2xl font-bold mb-4">{case.title}</h3>
+          <div className="grid md:grid-cols-3 gap-6 mb-4">
+            <div><p className="font-semibold text-red-500">Problem</p><p>{case.problem}</p></div>
+            <div><p className="font-semibold text-blue-500">Solution</p><p>{case.solution}</p></div>
+            <div><p className="font-semibold text-green-500">Result</p><p>{case.result}</p></div>
+          </div>
+          <div className="flex gap-2 flex-wrap">
+            {case.tech.map(t => <span key={t} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">{t}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
   const colors = {
     dark: { bg: '#000', card: '#111', text: '#fff', subtext: '#9ca3af', accent: '#22c55e', border: '#374151' },
     light: { bg: '#f9fafb', card: '#fff', text: '#111', subtext: '#4b5563', accent: '#16a34a', border: '#e5e7eb' },
@@ -151,6 +222,25 @@ function App() {
           {activeTab === 'contact' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Contact Me</h2><p style={{ color: c.subtext }}>Have a project in mind? Send me a message or pay 50% deposit to get started.</p><form action="https://api.web3forms.com/submit" method="POST" onSubmit={() => setSent(true)} style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}><input type="hidden" name="access_key" value="76d94847-2692-48b6-ad92-4819b1f2b838" /><input type="hidden" name="subject" value="New Message from Portfolio" /><input type="hidden" name="from_name" value="Portfolio Website" /><input type="hidden" name="redirect" value="https://web3forms.com/success" /><input type="text" name="name" placeholder="Your Name" required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }}/><input type="email" name="email" placeholder="Your Email" required onChange={(e) => setClientEmail(e.target.value)} style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }}/><textarea name="message" placeholder="Your Message" rows={4} required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }}/><button type="submit" disabled={sent} style={{ backgroundColor: sent? '#555' : c.accent, color: theme === 'dark'? 'black' : 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: sent? 'not-allowed' : 'pointer' }}>{sent? 'Message Sent! ✓' : 'Send Message'}</button></form><div style={{ marginTop: '20px', padding: '16px', border: `1px dashed ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}><h3 style={{ margin: '0 0 8px 0' }}>Ready to start?</h3><p style={{ color: c.subtext, fontSize: '14px', margin: '0 0 12px 0' }}>Pay ₦50,000 deposit to secure your project slot</p><input type="email" placeholder="Enter your email for receipt" value={clientEmail} onChange={(e) => setClientEmail(e.target.value)} required style={{ width: '100%', padding: '12px', backgroundColor: c.bg, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text, marginBottom: '12px', boxSizing: 'border-box' }}/>{clientEmail? (<button onClick={() => payWithPaystack(clientEmail, data.paystackKey)} style={{ backgroundColor: '#00C853', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: 'pointer' }}>Pay ₦50,000 Deposit</button>) : (<button disabled style={{ backgroundColor: '#555', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: 'not-allowed' }}>Enter email to pay</button>)}</div></section>}
         </main>
       </div>
+
+<section id="faq" className="py-20 px-6 bg-gray-50 dark:bg-gray-900">
+  <div className="max-w-3xl mx-auto">
+    <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+    
+    {[
+      {q: "How long does it take to build a website?", a: "Landing pages: 3 days. Business websites: 7 days. E-commerce: 14 days."},
+      {q: "Do you provide hosting and domain?", a: "Yes. I can set up everything for you or work with your existing provider."},
+      {q: "Can you redesign my current website?", a: "Absolutely. I specialize in modern redesigns that convert better."},
+      {q: "What is your payment structure?", a: "50% upfront to start, 50% on delivery. Payment plans available for projects above ₦300k."},
+      {q: "Do you offer after-launch support?", a: "Yes. All packages include 30 days of free support and bug fixes."}
+    ].map((item, i) => (
+      <details key={i} className="bg-white dark:bg-gray-800 mb-4 p-5 rounded-xl shadow cursor-pointer">
+        <summary className="font-semibold text-lg">{item.q}</summary>
+        <p className="mt-3 text-gray-600 dark:text-gray-300">{item.a}</p>
+      </details>
+    ))}
+  </div>
+</section>
 
      <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px', paddingBottom: '80px' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px', textAlign: 'center' }}>
