@@ -180,7 +180,7 @@ export default function App() {
       {/* Floating Buttons - ORIGINAL GOOD POSITION */}
       <div style={{ 
         position: 'fixed', 
-        bottom: '80px',  
+        bottom: '90px',  
         right: '16px', 
         display: 'flex', 
         flexDirection: 'column', 
