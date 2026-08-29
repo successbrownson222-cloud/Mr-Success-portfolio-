@@ -50,6 +50,7 @@ export default function App() {
     email: 'successbrownson222@gmail.com',
     phone: '+234 912 596 9210',
     whatsapp: 'https://wa.me/2349125969210?text=Hi%20Success%20I%20saw%20your%20portfolio%20and%20I%20need%20a%20website',
+    calendar: 'https://calendar.app.google/xyz123', // <-- PUT YOUR REAL GOOGLE CALENDAR LINK HERE
     paystackKey: 'pk_test_48465c9101ef5216a9d976b8ae4260493b45984c',
     github: 'https://github.com/successbrownson222-cloud',
     linkedin: 'https://www.linkedin.com/in/success-brownson-290292418',
@@ -162,7 +163,22 @@ export default function App() {
         </div>
       </footer>
 
-      <a href={data.whatsapp} target="_blank" rel="noopener noreferrer" style={{ position: 'fixed', bottom: '16px', right: '16px', backgroundColor: '#25D366', color: 'white', padding: '10px 14px', borderRadius: '50px', textDecoration: 'none', fontWeight: '600', fontSize: '14px', boxShadow: '0 3px 10px rgba(0,0,0,0.25)', zIndex: 999 }}>💬 Chat</a>
+      {/* Floating Buttons */}
+      <div style={{ position: 'fixed', bottom: '16px', right: '16px', display: 'flex', flexDirection: 'column', gap: '12px', zIndex: 999 }}>
+        
+        {/* Booking Button */}
+        <a 
+          href={data.calendar} // <-- CHANGE THIS TO YOUR REAL GOOGLE CALENDAR LINK
+          target="_blank" 
+          rel="noopener noreferrer" 
+          style={{ backgroundColor: '#3b82f6', color: 'white', padding: '12px 16px', borderRadius: '50px', textDecoration: 'none', fontWeight: '700', fontSize: '14px', boxShadow: '0 4px 15px rgba(59,130,246,0.4)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          📅 Book Call
+        </a>
+
+        <a href={data.whatsapp} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: '#25D366', color: 'white', padding: '12px 16px', borderRadius: '50px', textDecoration: 'none', fontWeight: '700', fontSize: '14px', boxShadow: '0 4px 15px rgba(37,211,102,0.4)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          💬 Chat
+        </a>
+      </div>
     </div>
   );
 }
