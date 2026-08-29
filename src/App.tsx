@@ -171,65 +171,57 @@ export default function App() {
         </main>
       </div>
 
-    <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px', paddingBottom: '16px' }}>
+    <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px', paddingBottom: '80px' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px', textAlign: 'center' }}>
           <p style={{ marginTop: '30px', paddingTop: '20px', borderTop: `1px solid ${c.border}`, color: c.subtext, fontSize: '14px' }}>© 2026 {data.name}. Built by Success</p>
         </div>
       </footer>
 
-      {/* Floating Buttons - FINAL CLEAN STYLE */}
+      {/* Floating Buttons - ORIGINAL GOOD POSITION */}
       <div style={{ 
         position: 'fixed', 
-        bottom: '16px',  
-        right: '12px', 
+        bottom: '80px',  
+        right: '16px', 
         display: 'flex', 
         flexDirection: 'column', 
-        gap: '8px',
+        gap: '10px',
         zIndex: 999 
       }}>
-        
-        {/* Booking Button */}
         <a 
           href={data.calendar}
           target="_blank" 
           rel="noopener noreferrer" 
           style={{ 
-            backgroundColor: '#3b82f6', 
+            backgroundColor: '#2563eb',
             color: 'white', 
-            padding: '8px 12px',
-            borderRadius: '20px',
+            padding: '10px 16px',
+            borderRadius: '50px', 
             textDecoration: 'none', 
-            fontWeight: '500',
+            fontWeight: '600',
             fontSize: '14px',
-            boxShadow: 'none',
             display: 'flex', 
             alignItems: 'center', 
-            gap: '4px',
-            border: `1px solid #3b82f6`,
-            whiteSpace: 'nowrap'
+            gap: '6px',
+            border: 'none'
           }}>
           📅 Book Call
         </a>
-
-        {/* WhatsApp Button */}
         <a 
           href={data.whatsapp} 
           target="_blank" 
           rel="noopener noreferrer" 
           style={{ 
-            backgroundColor: '#25D366', 
+            backgroundColor: '#22c55e',
             color: 'white', 
-            padding: '8px 12px',
-            borderRadius: '20px',
+            padding: '10px 16px',
+            borderRadius: '50px', 
             textDecoration: 'none', 
-            fontWeight: '500',
+            fontWeight: '600',
             fontSize: '14px',
-            boxShadow: 'none',
             display: 'flex', 
             alignItems: 'center', 
-            gap: '4px',
-            border: `1px solid #25D366`,
-            whiteSpace: 'nowrap'
+            gap: '6px',
+            border: 'none'
           }}>
           💬 Chat
         </a>
