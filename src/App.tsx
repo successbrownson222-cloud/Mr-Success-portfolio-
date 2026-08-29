@@ -180,7 +180,7 @@ export default function App() {
       {/* Floating Buttons - FINAL CLEAN STYLE */}
       <div style={{ 
         position: 'fixed', 
-        bottom: '16px',  // 16px so it doesn't float too high
+        bottom: '16px',  
         right: '12px', 
         display: 'flex', 
         flexDirection: 'column', 
@@ -196,16 +196,16 @@ export default function App() {
           style={{ 
             backgroundColor: '#3b82f6', 
             color: 'white', 
-            padding: '8px 12px', // smaller
-            borderRadius: '20px', // less round
+            padding: '8px 12px',
+            borderRadius: '20px',
             textDecoration: 'none', 
-            fontWeight: '500', // normal weight
-            fontSize: '14px', // 14px so mobile doesn't zoom
-            boxShadow: 'none', // NO shadow
+            fontWeight: '500',
+            fontSize: '14px',
+            boxShadow: 'none',
             display: 'flex', 
             alignItems: 'center', 
             gap: '4px',
-            border: `1px solid #3b82f6`, // thin border instead of shadow
+            border: `1px solid #3b82f6`,
             whiteSpace: 'nowrap'
           }}>
           📅 Book Call
@@ -233,6 +233,7 @@ export default function App() {
           }}>
           💬 Chat
         </a>
-     </div>
-   );
- }
+      </div>
+    </div>
+  );
+}
