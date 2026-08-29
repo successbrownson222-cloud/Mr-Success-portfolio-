@@ -25,6 +25,17 @@ export default function App() {
     }
   }, [sent]);
 
+  // PRO STAR RATING COMPONENT
+  const StarRating = ({ rating = 5 }) => {
+    return (
+      <div style={{ color: '#fbbf24', fontSize: '20px', marginBottom: '8px' }}>
+        {[...Array(5)].map((_, i) => (
+          <span key={i}>{i < rating? '★' : '☆'}</span>
+        ))}
+      </div>
+    )
+  }
+
   const payWithPaystack = (email: string, key: string) => {
     // @ts-ignore
     const handler = window.PaystackPop.setup({
@@ -50,7 +61,7 @@ export default function App() {
     email: 'successbrownson222@gmail.com',
     phone: '+234 912 596 9210',
     whatsapp: 'https://wa.me/2349125969210?text=Hi%20Success%20I%20saw%20your%20portfolio%20and%20I%20need%20a%20website',
-    calendar: 'https://calendar.app.google/xyz123', // <-- PUT YOUR REAL GOOGLE CALENDAR LINK HERE
+    calendar: 'https://calendar.app.google/xyz123',
     paystackKey: 'pk_test_48465c9101ef5216a9d976b8ae4260493b45984c',
     github: 'https://github.com/successbrownson222-cloud',
     linkedin: 'https://www.linkedin.com/in/success-brownson-290292418',
@@ -83,9 +94,9 @@ export default function App() {
       { name: 'E-commerce + Web App', price: '₦1,200,000', features: ['Unlimited Products', 'Payment + Inventory', 'Admin + Analytics', 'Custom Features', '6 Months Support'], popular: false },
     ],
     testimonials: [
-      { name: "UNN Final Year Project", review: "Delivered a full-stack student portal with authentication. Project scored 92% and was used as a reference.", role: "Academic Project" },
-      { name: "Local Business Website", review: "Built a responsive site for a family business. Now customers can view products and reach us on WhatsApp directly.", role: "Small Business" },
-      { name: "This Portfolio", review: "Designed, built, and got indexed on Google in 24 hours. Clean, fast, and converts visitors to clients.", role: "Personal Project" }
+      { name: "UNN Final Year Project", review: "Delivered a full-stack student portal with authentication. Project scored 92% and was used as a reference.", role: "Academic Project", rating: 5 },
+      { name: "Local Business Website", review: "Built a responsive site for a family business. Now customers can view products and reach us on WhatsApp directly.", role: "Small Business", rating: 5 },
+      { name: "This Portfolio", review: "Designed, built, and got indexed on Google in 24 hours. Clean, fast, and converts visitors to clients.", role: "Personal Project", rating: 5 }
     ],
     caseStudies: [
       { title: "E-commerce Store for Aba Fashion Brand", problem: "No online store. Losing customers to competitors.", solution: "Built full e-commerce site with Paystack and admin dashboard.", result: "₦1.2M in sales within 30 days of launch." },
@@ -145,7 +156,10 @@ export default function App() {
 
           {activeTab === 'pricing' && <section><h2 style={{ color: c.accent, fontSize: '28px', textAlign: 'center' }}>My Pricing</h2><div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>{data.pricing.map((plan) => (<div key={plan.name} style={{ padding: '24px', border: `2px solid ${plan.popular? c.accent : c.border}`, borderRadius: '16px', backgroundColor: c.card, position: 'relative' }}>{plan.popular && <span style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', padding: '4px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold' }}>MOST POPULAR</span>}<h3 style={{ fontSize: '22px', fontWeight: 'bold', textAlign: 'center' }}>{plan.name}</h3><p style={{ fontSize: '36px', fontWeight: 'bold', color: c.accent, textAlign: 'center', margin: '16px 0' }}>{plan.price}</p><ul style={{ listStyle: 'none', padding: 0, margin: '20px 0' }}>{plan.features.map((f) => <li key={f} style={{ padding: '8px 0', color: c.subtext }}>✓ {f}</li>)}</ul><button onClick={() => setActiveTab('contact')} style={{ width: '100%', padding: '14px', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Get Started</button></div>))}</div></section>}
 
-          {activeTab === 'testimonials' && <section><h2 style={{ color: c.accent, fontSize: '28px', textAlign: 'center' }}>What People Say</h2><div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', marginTop: '24px' }}>{data.testimonials.map((t) => (<div key={t.name} style={{ padding: '20px', backgroundColor: c.card, borderRadius: '12px', border: `1px solid ${c.border}` }}><div style={{ color: '#fbbf24', fontSize: '20px' }}>★★★</div><p style={{ fontStyle: 'italic', color: c.subtext, margin: '12px 0' }}>"{t.review}"</p><h4 style={{ fontWeight: 'bold' }}>{t.name}</h4><p style={{ fontSize: '14px', color: c.subtext }}>{t.role}</p></div>))}</div></section>}
+          {activeTab === 'testimonials' && <section><h2 style={{ color: c.accent, fontSize: '28px', textAlign: 'center' }}>What People Say</h2><div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', marginTop: '24px' }}>{data.testimonials.map((t) => (<div key={t.name} style={{ padding: '20px', backgroundColor: c.card, borderRadius: '12px', border: `1px solid ${c.border}` }}>
+            {/* PRO STAR RATING HERE */}
+            <StarRating rating={t.rating} />
+            <p style={{ fontStyle: 'italic', color: c.subtext, margin: '12px 0' }}>"{t.review}"</p><h4 style={{ fontWeight: 'bold' }}>{t.name}</h4><p style={{ fontSize: '14px', color: c.subtext }}>{t.role}</p></div>))}</div></section>}
 
           {activeTab === 'cases' && <section><h2 style={{ color: c.accent, fontSize: '28px', textAlign: 'center' }}>Case Studies</h2><div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '24px' }}>{data.caseStudies.map((cs) => (<div key={cs.title} style={{ padding: '20px', backgroundColor: c.card, borderRadius: '12px', border: `1px solid ${c.border}` }}><h3 style={{ fontWeight: 'bold', fontSize: '20px' }}>{cs.title}</h3><div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', marginTop: '12px' }}><div><p style={{ color: '#ef4444', fontWeight: 'bold' }}>Problem</p><p style={{ color: c.subtext }}>{cs.problem}</p></div><div><p style={{ color: '#3b82f6', fontWeight: 'bold' }}>Solution</p><p style={{ color: c.subtext }}>{cs.solution}</p></div><div><p style={{ color: '#22c55e', fontWeight: 'bold' }}>Result</p><p style={{ color: c.subtext }}>{cs.result}</p></div></div></div>))}</div></section>}
 
@@ -163,11 +177,9 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Floating Buttons */}
-      <div style={{ position: 'fixed', bottom: '16px', right: '16px', display: 'flex', flexDirection: 'column', gap: '12px', zIndex: 999 }}>
-        
-        {/* Booking Button */}
-        <a 
+      {/* Floating Buttons - bottom 80px */}
+      <div style={{ position: 'fixed', bottom: '80px', right: '16px', display: 'flex', flexDirection: 'column', gap: '12px', zIndex: 999 }}>
+         <a 
           href={data.calendar} // <-- CHANGE THIS TO YOUR REAL GOOGLE CALENDAR LINK
           target="_blank" 
           rel="noopener noreferrer" 
@@ -175,7 +187,12 @@ export default function App() {
           📅 Book Call
         </a>
 
-        <a href={data.whatsapp} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: '#25D366', color: 'white', padding: '12px 16px', borderRadius: '50px', textDecoration: 'none', fontWeight: '700', fontSize: '14px', boxShadow: '0 4px 15px rgba(37,211,102,0.4)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+        {/* WhatsApp Button */}
+        <a 
+          href={data.whatsapp} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          style={{ backgroundColor: '#25D366', color: 'white', padding: '12px 16px', borderRadius: '50px', textDecoration: 'none', fontWeight: '700', fontSize: '14px', boxShadow: '0 4px 15px rgba(37,211,102,0.4)', display: 'flex', alignItems: 'center', gap: '6px' }}>
           💬 Chat
         </a>
       </div>
