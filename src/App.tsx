@@ -30,7 +30,7 @@ function App() {
     const handler = window.PaystackPop.setup({
       key: key,
       email: email,
-      amount: 5000000, // 50000 NGN in kobo
+      amount: 5000000,
       currency: 'NGN',
       ref: '' + Math.floor(Math.random() * 1000000 + 1),
       callback: function (response: any) {
@@ -53,7 +53,6 @@ function App() {
     paystackKey: 'pk_test_48465c9101ef5216a9d976b8ae4260493b45984c',
     github: 'https://github.com/successbrownson222-cloud',
     linkedin: 'https://www.linkedin.com/in/success-brownson-290292418',
-    twitter: 'https://twitter.com/',
     resume: 'https://drive.google.com/file/d/1IwSg3fYrlcwhFqMtDga3a_WzEifLDG4_/view?usp=drivesdk',
     photo: 'https://files.catbox.moe/b84keh.jpg',
     about: 'Fullstack Developer with 6+ years building responsive web apps with React, JavaScript, Typescript, Node.js, Python, and Php, Java Spring Boot. I build scalable products that solve real problems for businesses in Nigeria and globally.',
@@ -81,7 +80,7 @@ function App() {
       { name: 'Starter Website', price: '₦250,000', features: ['5 Pages Responsive', 'Contact Form + WhatsApp', 'Basic SEO Setup', '1 Month Support', 'Delivery: 7 Days'], popular: false },
       { name: 'Business Website', price: '₦550,000', features: ['10 Pages Responsive', 'Blog + CMS', 'Paystack Integration', 'Admin Dashboard', 'Advanced SEO + 3 Months Support'], popular: true },
       { name: 'E-commerce + Web App', price: '₦1,200,000', features: ['Unlimited Products', 'Payment + Inventory', 'Admin + Analytics', 'Custom Features', '6 Months Support'], popular: false },
-    ], // <- THIS WAS MISSING
+    ],
     testimonials: [
       { name: "UNN Final Year Project", review: "Delivered a full-stack student portal with authentication. Project scored 92% and was used as a reference.", role: "Academic Project" },
       { name: "Local Business Website", review: "Built a responsive site for a family business. Now customers can view products and reach us on WhatsApp directly.", role: "Small Business" },
@@ -97,7 +96,7 @@ function App() {
       { q: "What is your payment structure?", a: "50% upfront to start, 50% on delivery. Payment plans available for projects above ₦300k." },
       { q: "Do you offer after-launch support?", a: "Yes. All packages include 30 days of free support and bug fixes." }
     ]
-  }; // <- CLOSED DATA OBJECT
+  };
 
   const colors = {
     dark: { bg: '#000', card: '#111', text: '#fff', subtext: '#9ca3af', accent: '#22c55e', border: '#374151' },
@@ -107,7 +106,7 @@ function App() {
   const c = colors[theme as keyof typeof colors];
   const categories = ['All',...new Set(data.projects.map((p) => p.category))];
   const filteredProjects = filter === 'All'? data.projects : data.projects.filter((p) => p.category === filter);
-  const tabs = ['about', 'skills', 'projects', 'pricing', 'testimonials', 'cases', 'blog', 'contact'];
+  const tabs = ['about', 'skills', 'projects', 'pricing', 'testimonials', 'cases', 'faq', 'blog', 'contact'];
 
   return (
     <div style={{ backgroundColor: c.bg, color: c.text, minHeight: '100vh', fontFamily: 'system-ui, sans-serif', transition: 'all 0.3s' }}>
@@ -138,16 +137,13 @@ function App() {
 
           {activeTab === 'pricing' && <section><h2 style={{ color: c.accent, fontSize: '28px', textAlign: 'center' }}>My Pricing</h2><div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>{data.pricing.map((plan) => (<div key={plan.name} style={{ padding: '24px', border: `2px solid ${plan.popular? c.accent : c.border}`, borderRadius: '16px', backgroundColor: c.card, position: 'relative' }}>{plan.popular && <span style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', padding: '4px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold' }}>MOST POPULAR</span>}<h3 style={{ fontSize: '22px', fontWeight: 'bold', textAlign: 'center' }}>{plan.name}</h3><p style={{ fontSize: '36px', fontWeight: 'bold', color: c.accent, textAlign: 'center', margin: '16px 0' }}>{plan.price}</p><ul style={{ listStyle: 'none', padding: 0, margin: '20px 0' }}>{plan.features.map((f) => <li key={f} style={{ padding: '8px 0', color: c.subtext }}>✓ {f}</li>)}</ul><button onClick={() => setActiveTab('contact')} style={{ width: '100%', padding: '14px', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Get Started</button></div>))}</div></section>}
 
-          {/* NEW: TESTIMONIALS */}
-          {activeTab === 'testimonials' && <section><h2 style={{ color: c.accent, fontSize: '28px', textAlign: 'center' }}>What People Say</h2><div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', marginTop: '24px' }}>{data.testimonials.map((t) => (<div key={t.name} style={{ padding: '20px', backgroundColor: c.card, borderRadius: '12px', border: `1px solid ${c.border}` }}><div style={{ color: '#fbbf24', fontSize: '20px' }}>★★★★★</div><p style={{ fontStyle: 'italic', color: c.subtext, margin: '12px 0' }}>"{t.review}"</p><h4 style={{ fontWeight: 'bold' }}>{t.name}</h4><p style={{ fontSize: '14px', color: c.subtext }}>{t.role}</p></div>))}</div></section>}
+          {activeTab === 'testimonials' && <section><h2 style={{ color: c.accent, fontSize: '28px', textAlign: 'center' }}>What People Say</h2><div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', marginTop: '24px' }}>{data.testimonials.map((t) => (<div key={t.name} style={{ padding: '20px', backgroundColor: c.card, borderRadius: '12px', border: `1px solid ${c.border}` }}><div style={{ color: '#fbbf24', fontSize: '20px' }}>★★★</div><p style={{ fontStyle: 'italic', color: c.subtext, margin: '12px 0' }}>"{t.review}"</p><h4 style={{ fontWeight: 'bold' }}>{t.name}</h4><p style={{ fontSize: '14px', color: c.subtext }}>{t.role}</p></div>))}</div></section>}
 
-          {/* NEW: CASE STUDIES */}
           {activeTab === 'cases' && <section><h2 style={{ color: c.accent, fontSize: '28px', textAlign: 'center' }}>Case Studies</h2><div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '24px' }}>{data.caseStudies.map((cs) => (<div key={cs.title} style={{ padding: '20px', backgroundColor: c.card, borderRadius: '12px', border: `1px solid ${c.border}` }}><h3 style={{ fontWeight: 'bold', fontSize: '20px' }}>{cs.title}</h3><div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', marginTop: '12px' }}><div><p style={{ color: '#ef4444', fontWeight: 'bold' }}>Problem</p><p style={{ color: c.subtext }}>{cs.problem}</p></div><div><p style={{ color: '#3b82f6', fontWeight: 'bold' }}>Solution</p><p style={{ color: c.subtext }}>{cs.solution}</p></div><div><p style={{ color: '#22c55e', fontWeight: 'bold' }}>Result</p><p style={{ color: c.subtext }}>{cs.result}</p></div></div></div>))}</div></section>}
 
-          {activeTab === 'blog' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Blog</h2><div style={{ marginTop: '20px', padding: '20px', border: `1px solid ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}><p style={{ color: c.subtext, fontSize: '14px' }}>Aug 19, 2025</p><h3 style={{ fontWeight: 'bold', fontSize: '20px', marginTop: '8px', color: c.text }}>Debugging a Vercel Build Failure</h3><p style={{ color: c.subtext, marginTop: '8px' }}>How a single typo caused a failed Vercel deployment.</p></div></section>}
-
-          {/* NEW: FAQ */}
           {activeTab === 'faq' && <section><h2 style={{ color: c.accent, fontSize: '28px', textAlign: 'center' }}>Frequently Asked Questions</h2><div style={{ marginTop: '24px' }}>{data.faq.map((item) => (<details key={item.q} style={{ backgroundColor: c.card, marginBottom: '12px', padding: '16px', borderRadius: '12px', border: `1px solid ${c.border}` }}><summary style={{ fontWeight: 'bold', cursor: 'pointer' }}>{item.q}</summary><p style={{ marginTop: '8px', color: c.subtext }}>{item.a}</p></details>))}</div></section>}
+
+          {activeTab === 'blog' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Blog</h2><div style={{ marginTop: '20px', padding: '20px', border: `1px solid ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}><p style={{ color: c.subtext, fontSize: '14px' }}>Aug 19, 2025</p><h3 style={{ fontWeight: 'bold', fontSize: '20px', marginTop: '8px', color: c.text }}>Debugging a Vercel Build Failure</h3><p style={{ color: c.subtext, marginTop: '8px' }}>How a single typo caused a failed Vercel deployment.</p></div></section>}
 
           {activeTab === 'contact' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Contact Me</h2><form action="https://api.web3forms.com/submit" method="POST" onSubmit={() => setSent(true)} style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}><input type="hidden" name="access_key" value="76d94847-2692-48b6-ad92-4819b1f2b838" /><input type="text" name="name" placeholder="Your Name" required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><input type="email" name="email" placeholder="Your Email" required onChange={(e) => setClientEmail(e.target.value)} style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><textarea name="message" placeholder="Your Message" rows={4} required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><button type="submit" disabled={sent} style={{ backgroundColor: sent? '#555' : c.accent, color: theme === 'dark'? 'black' : 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: sent? 'not-allowed' : 'pointer' }}>{sent? 'Message Sent! ✓' : 'Send Message'}</button></form></section>}
         </main>
