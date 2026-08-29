@@ -171,20 +171,20 @@ export default function App() {
         </main>
       </div>
 
-     <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px', paddingBottom: '24px' }}>
+    <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px', paddingBottom: '16px' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px', textAlign: 'center' }}>
           <p style={{ marginTop: '30px', paddingTop: '20px', borderTop: `1px solid ${c.border}`, color: c.subtext, fontSize: '14px' }}>© 2026 {data.name}. Built by Success</p>
         </div>
       </footer>
 
-      {/* Floating Buttons - FIXED STYLE */}
+      {/* Floating Buttons - FINAL CLEAN STYLE */}
       <div style={{ 
         position: 'fixed', 
-        bottom: '24px',  
-        right: '16px', 
+        bottom: '16px',  // 16px so it doesn't float too high
+        right: '12px', 
         display: 'flex', 
         flexDirection: 'column', 
-        gap: '10px',
+        gap: '8px',
         zIndex: 999 
       }}>
         
@@ -196,16 +196,17 @@ export default function App() {
           style={{ 
             backgroundColor: '#3b82f6', 
             color: 'white', 
-            padding: '10px 14px',
-            borderRadius: '50px', 
+            padding: '8px 12px', // smaller
+            borderRadius: '20px', // less round
             textDecoration: 'none', 
-            fontWeight: '600',
-            fontSize: '13px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+            fontWeight: '500', // normal weight
+            fontSize: '14px', // 14px so mobile doesn't zoom
+            boxShadow: 'none', // NO shadow
             display: 'flex', 
             alignItems: 'center', 
-            gap: '6px',
-            border: 'none'
+            gap: '4px',
+            border: `1px solid #3b82f6`, // thin border instead of shadow
+            whiteSpace: 'nowrap'
           }}>
           📅 Book Call
         </a>
@@ -218,20 +219,20 @@ export default function App() {
           style={{ 
             backgroundColor: '#25D366', 
             color: 'white', 
-            padding: '10px 14px',
-            borderRadius: '50px', 
+            padding: '8px 12px',
+            borderRadius: '20px',
             textDecoration: 'none', 
-            fontWeight: '600',
-            fontSize: '13px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+            fontWeight: '500',
+            fontSize: '14px',
+            boxShadow: 'none',
             display: 'flex', 
             alignItems: 'center', 
-            gap: '6px',
-            border: 'none'
+            gap: '4px',
+            border: `1px solid #25D366`,
+            whiteSpace: 'nowrap'
           }}>
           💬 Chat
         </a>
-      </div>
-    </div>  
-  );
-}
+     </div>
+   );
+ }
