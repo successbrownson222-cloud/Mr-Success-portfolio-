@@ -115,17 +115,16 @@ export default function App() {
       </button>
 
       <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px' }}>
-        <header style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <header style={{ textAlign: 'center', marginBottom: '40px', paddingTop: '60px' }}>
           <img src={data.photo} alt={data.name} style={{ width: '140px', height: '140px', borderRadius: '50%', border: `4px solid ${c.accent}`, objectFit: 'cover', marginBottom: '16px' }} />
-          <h1 style={{ color: c.accent, fontSize: '32px', fontWeight: 'bold', margin: 0, lineHeight: '1.1', whiteSpace: 'nowrap' }}>{data.name}</h1>
-          <p style={{ fontSize: '20px', color: c.subtext, marginTop: '8px' }}>{data.role}</p>
-          <p style={{ color: c.subtext, marginBottom: '10px' }}>
-            <a href={`mailto:${data.email}`} style={{ color: c.accent, textDecoration: 'none' }}>📧 {data.email}</a>
-          </p>
-          <p style={{ color: c.subtext, marginBottom: '20px' }}>{data.location}</p>
+          <h1 style={{ color: c.accent, fontSize: '28px', fontWeight: 'bold', margin: 0, lineHeight: '1.2', wordBreak: 'break-word', padding: '0 10px' }}>{data.name}</h1>
+          <p style={{ fontSize: '18px', color: c.subtext, marginTop: '8px' }}>{data.role}</p>
+          <p style={{ color: c.subtext, marginBottom: '20px', fontSize: '14px' }}>{data.location}</p>
+
           <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href={data.github} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 18px', backgroundColor: c.card, color: c.text, border: `1px solid ${c.border}`, borderRadius: '10px', textDecoration: 'none', fontWeight: '600' }}>💻 GitHub</a>
             <a href={data.linkedin} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 18px', backgroundColor: c.card, color: c.text, border: `1px solid ${c.border}`, borderRadius: '10px', textDecoration: 'none', fontWeight: '600' }}>💼 LinkedIn</a>
+            <a href={`mailto:${data.email}`} style={{ padding: '10px 18px', backgroundColor: c.card, color: c.text, border: `1px solid ${c.border}`, borderRadius: '10px', textDecoration: 'none', fontWeight: '600' }}>📧 Email</a>
             <a href={data.resume} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 18px', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', border: `1px solid ${c.accent}`, borderRadius: '10px', textDecoration: 'none', fontWeight: 'bold' }}>📄 Resume</a>
           </div>
         </header>
