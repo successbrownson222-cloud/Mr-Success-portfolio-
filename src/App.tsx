@@ -171,19 +171,42 @@ export default function App() {
         </main>
       </div>
 
-      <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px', paddingBottom: '80px' }}>
+     <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px', paddingBottom: '24px' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px', textAlign: 'center' }}>
           <p style={{ marginTop: '30px', paddingTop: '20px', borderTop: `1px solid ${c.border}`, color: c.subtext, fontSize: '14px' }}>© 2026 {data.name}. Built by Success</p>
         </div>
       </footer>
 
-      {/* Floating Buttons - bottom 80px */}
-      <div style={{ position: 'fixed', bottom: '80px', right: '16px', display: 'flex', flexDirection: 'column', gap: '12px', zIndex: 999 }}>
-         <a 
-          href={data.calendar} // <-- CHANGE THIS TO YOUR REAL GOOGLE CALENDAR LINK
+      {/* Floating Buttons - FIXED STYLE */}
+      <div style={{ 
+        position: 'fixed', 
+        bottom: '24px',  
+        right: '16px', 
+        display: 'flex', 
+        flexDirection: 'column', 
+        gap: '10px',
+        zIndex: 999 
+      }}>
+        
+        {/* Booking Button */}
+        <a 
+          href={data.calendar}
           target="_blank" 
           rel="noopener noreferrer" 
-          style={{ backgroundColor: '#3b82f6', color: 'white', padding: '12px 16px', borderRadius: '50px', textDecoration: 'none', fontWeight: '700', fontSize: '14px', boxShadow: '0 4px 15px rgba(59,130,246,0.4)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          style={{ 
+            backgroundColor: '#3b82f6', 
+            color: 'white', 
+            padding: '10px 14px',
+            borderRadius: '50px', 
+            textDecoration: 'none', 
+            fontWeight: '600',
+            fontSize: '13px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '6px',
+            border: 'none'
+          }}>
           📅 Book Call
         </a>
 
@@ -192,10 +215,23 @@ export default function App() {
           href={data.whatsapp} 
           target="_blank" 
           rel="noopener noreferrer" 
-          style={{ backgroundColor: '#25D366', color: 'white', padding: '12px 16px', borderRadius: '50px', textDecoration: 'none', fontWeight: '700', fontSize: '14px', boxShadow: '0 4px 15px rgba(37,211,102,0.4)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          style={{ 
+            backgroundColor: '#25D366', 
+            color: 'white', 
+            padding: '10px 14px',
+            borderRadius: '50px', 
+            textDecoration: 'none', 
+            fontWeight: '600',
+            fontSize: '13px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '6px',
+            border: 'none'
+          }}>
           💬 Chat
         </a>
       </div>
-    </div>
+    </div>  
   );
 }
