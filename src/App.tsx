@@ -117,11 +117,9 @@ export default function App() {
       <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px' }}>
         <header style={{ textAlign: 'center', marginBottom: '40px' }}>
           <img src={data.photo} alt={data.name} style={{ width: '140px', height: '140px', borderRadius: '50%', border: `4px solid ${c.accent}`, objectFit: 'cover', marginBottom: '16px' }} />
-          <header style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <img src={data.photo} alt={data.name} style={{ width: '140px', height: '140px', borderRadius: '50%', border: `4px solid ${c.accent}`, objectFit: 'cover', marginBottom: '16px' }} />
           <h1 style={{ color: c.accent, fontSize: '32px', fontWeight: 'bold', margin: 0, lineHeight: '1.1', whiteSpace: 'nowrap' }}>{data.name}</h1>
           <p style={{ fontSize: '20px', color: c.subtext, marginTop: '8px' }}>{data.role}</p>
-          <p style={{ color: c.subtext, marginBottom: '20px' }}>
+          <p style={{ color: c.subtext, marginBottom: '10px' }}>
             <a href={`mailto:${data.email}`} style={{ color: c.accent, textDecoration: 'none' }}>📧 {data.email}</a>
           </p>
           <p style={{ color: c.subtext, marginBottom: '20px' }}>{data.location}</p>
