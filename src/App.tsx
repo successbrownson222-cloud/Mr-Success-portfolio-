@@ -61,7 +61,7 @@ export default function App() {
     email: 'successbrownson222@gmail.com',
     phone: '+234 912 596 9210',
     whatsapp: 'https://wa.me/2349125969210?text=Hi%20Success%20I%20saw%20your%20portfolio%20and%20I%20need%20a%20website',
-    calendar: 'https://calendar.app.google/xyz123',
+    calendar: 'https://calendly.com/successbrownson222/new-meeting-1',
     paystackKey: 'pk_test_48465c9101ef5216a9d976b8ae4260493b45984c',
     github: 'https://github.com/successbrownson222-cloud',
     linkedin: 'https://www.linkedin.com/in/success-brownson-tech-290292418?utm_source=share_via&utm_content=profile&utm_medium=member_android',
@@ -180,7 +180,7 @@ export default function App() {
       {/* Floating Buttons - FIXED FOR MOBILE */}
       <div style={{ 
         position: 'fixed', 
-        bottom: '210px',  // Lifted way above nav
+        bottom: '195px',  // Lifted way above nav
         right: '12px', 
         display: 'flex', 
         flexDirection: 'column', 
