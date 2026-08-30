@@ -180,8 +180,8 @@ export default function App() {
       {/* Floating Buttons - FIXED FOR MOBILE */}
       <div style={{ 
         position: 'fixed', 
-        bottom: '225px',  // Lifted way above nav
-        right: '12px', 
+        bottom: '39px',  // Lifted way above nav
+        right: '13px', 
         display: 'flex', 
         flexDirection: 'column', 
         gap: '7px',
@@ -194,7 +194,7 @@ export default function App() {
           style={{ 
             backgroundColor: '#2563eb',
             color: 'white', 
-            padding: '10px 16px',
+            padding: '10px 15px',
             borderRadius: '50px', 
             textDecoration: 'none', 
             fontWeight: '600',
@@ -213,7 +213,7 @@ export default function App() {
           style={{ 
             backgroundColor: '#22c55e',
             color: 'white', 
-            padding: '10px 16px',
+            padding: '10px 15px',
             borderRadius: '50px', 
             textDecoration: 'none', 
             fontWeight: '600',
