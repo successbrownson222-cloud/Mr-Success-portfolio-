@@ -64,7 +64,7 @@ export default function App() {
     calendar: 'https://calendar.app.google/xyz123',
     paystackKey: 'pk_test_48465c9101ef5216a9d976b8ae4260493b45984c',
     github: 'https://github.com/successbrownson222-cloud',
-    linkedin: 'https://www.linkedin.com/in/success-brownson-290292418',
+    linkedin: 'https://www.linkedin.com/in/success-brownson-tech-290292418?utm_source=share_via&utm_content=profile&utm_medium=member_android',
     resume: 'https://drive.google.com/file/d/1IwSg3fYrlcwhFqMtDga3a_WzEifLDG4_/view?usp=drivesdk',
     photo: 'https://files.catbox.moe/b84keh.jpg',
     about: 'Fullstack Developer with 6+ years building responsive web apps with React, JavaScript, Typescript, Node.js, Python, Php, Java Spring Boot. I build scalable products that solve real problems for businesses in Nigeria and globally.',
@@ -180,7 +180,7 @@ export default function App() {
       {/* Floating Buttons - FIXED FOR MOBILE */}
       <div style={{ 
         position: 'fixed', 
-        bottom: '180px',  // Lifted way above nav
+        bottom: '210px',  // Lifted way above nav
         right: '12px', 
         display: 'flex', 
         flexDirection: 'column', 
