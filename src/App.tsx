@@ -177,15 +177,15 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Floating Buttons - ORIGINAL GOOD POSITION */}
+      {/* Floating Buttons - FIXED FOR MOBILE */}
       <div style={{ 
         position: 'fixed', 
-        bottom: '90px',  
-        right: '16px', 
+        bottom: '90px',  // Lifted way above nav
+        right: '12px', 
         display: 'flex', 
         flexDirection: 'column', 
-        gap: '10px',
-        zIndex: 999 
+        gap: '8px',
+        zIndex: 9999
       }}>
         <a 
           href={data.calendar}
