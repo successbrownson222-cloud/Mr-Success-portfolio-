@@ -180,7 +180,7 @@ export default function App() {
       {/* Floating Buttons - FIXED FOR MOBILE */}
       <div style={{ 
         position: 'fixed', 
-        bottom: '120px',  // Lifted way above nav
+        bottom: '150px',  // Lifted way above nav
         right: '12px', 
         display: 'flex', 
         flexDirection: 'column', 
