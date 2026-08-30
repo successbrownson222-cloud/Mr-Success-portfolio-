@@ -67,7 +67,7 @@ export default function App() {
     linkedin: 'https://www.linkedin.com/in/success-brownson-290292418',
     resume: 'https://drive.google.com/file/d/1IwSg3fYrlcwhFqMtDga3a_WzEifLDG4_/view?usp=drivesdk',
     photo: 'https://files.catbox.moe/b84keh.jpg',
-    about: 'Fullstack Developer with 6+ years building responsive web apps with React, JavaScript, Typescript, Node.js, Python, and Php, Java Spring Boot. I build scalable products that solve real problems for businesses in Nigeria and globally.',
+    about: 'Fullstack Developer with 6+ years building responsive web apps with React, JavaScript, Typescript, Node.js, Python, Php, Java Spring Boot. I build scalable products that solve real problems for businesses in Nigeria and globally.',
     skills: [
       { name: 'React.js', level: 90, category: 'Frontend' },
       { name: 'Javascript', level: 85, category: 'Frontend' },
@@ -180,7 +180,7 @@ export default function App() {
       {/* Floating Buttons - FIXED FOR MOBILE */}
       <div style={{ 
         position: 'fixed', 
-        bottom: '60px',  // Lifted way above nav
+        bottom: '40px',  // Lifted way above nav
         right: '12px', 
         display: 'flex', 
         flexDirection: 'column', 
