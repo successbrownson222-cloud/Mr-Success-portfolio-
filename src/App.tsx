@@ -37,7 +37,7 @@ export default function App() {
     )
   }
 
-  // NEW: Connect to YOUR backend instead of Paystack Inline
+  // NEW: Connect to YOUR backend instead of 
   const payWithPaystack = async (email: string) => {
     if (!email) {
       alert('Please enter your email first');
@@ -66,7 +66,6 @@ export default function App() {
       const result = await response.json();
 
       if (result.status && result.data?.authorization_url) {
-        // Redirect user to Paystack
         window.location.href = result.data.authorization_url;
       } else {
         alert('Payment initiation failed: ' + (result.message || 'Unknown error'));
