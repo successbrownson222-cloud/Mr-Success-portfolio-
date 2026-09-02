@@ -194,11 +194,19 @@ export default function App() {
 
           {activeTab === 'contact' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Contact Me</h2><p style={{ color: c.subtext }}>Have a project in mind? Send me a message or pay 50% deposit to get started.</p><form action="https://api.web3forms.com/submit" method="POST" onSubmit={() => setSent(true)} style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}><input type="hidden" name="access_key" value="76d94847-2692-48b6-ad92-4819b1f2b838" /><input type="text" name="name" placeholder="Your Name" required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><input type="email" name="email" placeholder="Your Email" required onChange={(e) => setClientEmail(e.target.value)} style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><textarea name="message" placeholder="Your Message" rows={4} required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><button type="submit" disabled={sent} style={{ backgroundColor: sent? '#555' : c.accent, color: theme === 'dark'? 'black' : 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: sent? 'not-allowed' : 'pointer' }}>{sent? 'Message Sent! ✓' : 'Send Message'}</button></form><div style={{ marginTop: '20px', padding: '16px', border: `1px dashed ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}><h3>Ready to start?</h3><p style={{ color: c.subtext, fontSize: '14px' }}>Pay ₦50,000 deposit to secure your project slot</p><input type="email" placeholder="Enter your email for receipt" value={clientEmail} onChange={(e) => setClientEmail(e.target.value)} required style={{ width: '100%', padding: '12px', backgroundColor: c.bg, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text, marginBottom: '12px', boxSizing: 'border-box' }} />{clientEmail? (<button
                 disabled={loadingPayment}
-                onClick={() => payWithPaystack(clientEmail)}
-                disabled={loadingPayment}
-                style={{ backgroundColor: loadingPayment? '#555' : '#00C853', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: loadingPayment? 'not-allowed' : 'pointer' }}>
-                {loadingPayment? 'Processing...' : 'Pay ₦50,000 Deposit'}
-              </button>) : (<button disabled style={{ backgroundColor: '#555', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: 'not-allowed' }}>Enter email to pay</button>)}</div></section>}
+                onClick={() => payWithPaystack{clientEmail ? (
+  <button
+    onClick={() => payWithPaystack(clientEmail)}
+    disabled={loadingPayment}
+    style={{ backgroundColor: loadingPayment ? '#555' : '#00C853', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: loadingPayment ? 'not-allowed' : 'pointer' }}
+  >
+    {loadingPayment ? 'Processing...' : 'Pay ₦50,000 Deposit'}
+  </button>
+) : (
+  <button disabled style={{ backgroundColor: '#555', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: 'not-allowed' }}>
+    Enter email to pay
+  </button>
+)}</section>}
         </main>
       </div>
 
