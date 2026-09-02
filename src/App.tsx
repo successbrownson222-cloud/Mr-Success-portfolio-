@@ -7,7 +7,7 @@ export default function App() {
   const [sent, setSent] = useState(false);
   const [animateSkills, setAnimateSkills] = useState(false);
   const [clientEmail, setClientEmail] = useState('');
-  const [loadingPayment, setLoadingPayment] = useState(false); // added
+  const [loadingPayment, setLoadingPayment] = useState(false);
 
   useEffect(() => {
     if (activeTab === 'skills') {
@@ -26,7 +26,6 @@ export default function App() {
     }
   }, [sent]);
 
-  // PRO STAR RATING COMPONENT
   const StarRating = ({ rating = 5 }) => {
     return (
       <div style={{ color: '#fbbf24', fontSize: '20px', marginBottom: '8px' }}>
@@ -37,7 +36,6 @@ export default function App() {
     )
   }
 
-  // NEW: Connect to YOUR backend instead of Paystack Inline
   const payWithPaystack = async (email: string) => {
     if (!email) {
       alert('Please enter your email first');
@@ -53,7 +51,7 @@ export default function App() {
         },
         body: JSON.stringify({
           email: email,
-          amount: 50000 * 100, // ₦50,000 in kobo
+          amount: 50000 * 100,
           reference: 'deposit_' + Date.now(),
           metadata: {
             custom_fields: [
@@ -65,8 +63,7 @@ export default function App() {
 
       const result = await response.json();
 
-      if (result.status && result.data?.authorization_url) {
-        // Redirect user to Paystack
+      if (result.status === true && result.data && result.data.authorization_url) {
         window.location.href = result.data.authorization_url;
       } else {
         alert('Payment initiation failed: ' + (result.message || 'Unknown error'));
@@ -88,7 +85,6 @@ export default function App() {
     phone: '+234 912 596 9210',
     whatsapp: 'https://wa.me/2349125969210?text=Hi%20Success%20I%20saw%20your%20portfolio%20and%20I%20need%20a%20website',
     calendar: 'https://calendly.com/successbrownson222/new-meeting-1',
-    // REMOVED paystackKey - no longer needed in frontend
     github: 'https://github.com/successbrownson222-cloud',
     linkedin: 'https://www.linkedin.com/in/success-brownson-tech-290292418?utm_source=share_via&utm_content=profile&utm_medium=member_android',
     resume: 'https://drive.google.com/file/d/1IwSg3fYrlcwhFqMtDga3a_WzEifLDG4_/view?usp=drivesdk',
@@ -194,32 +190,22 @@ export default function App() {
 
           {activeTab === 'contact' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Contact Me</h2><p style={{ color: c.subtext }}>Have a project in mind? Send me a message or pay 50% deposit to get started.</p><form action="https://api.web3forms.com/submit" method="POST" onSubmit={() => setSent(true)} style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}><input type="hidden" name="access_key" value="76d94847-2692-48b6-ad92-4819b1f2b838" /><input type="text" name="name" placeholder="Your Name" required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><input type="email" name="email" placeholder="Your Email" required onChange={(e) => setClientEmail(e.target.value)} style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><textarea name="message" placeholder="Your Message" rows={4} required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><button type="submit" disabled={sent} style={{ backgroundColor: sent? '#555' : c.accent, color: theme === 'dark'? 'black' : 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: sent? 'not-allowed' : 'pointer' }}>{sent? 'Message Sent! ✓' : 'Send Message'}</button></form><div style={{ marginTop: '20px', padding: '16px', border: `1px dashed ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}><h3>Ready to start?</h3><p style={{ color: c.subtext, fontSize: '14px' }}>Pay ₦50,000 deposit to secure your project slot</p><input type="email" placeholder="Enter your email for receipt" value={clientEmail} onChange={(e) => setClientEmail(e.target.value)} required style={{ width: '100%', padding: '12px', backgroundColor: c.bg, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text, marginBottom: '12px', boxSizing: 'border-box' }} />{clientEmail? (<button
                 disabled={loadingPayment}
-                onClick={() => payWithPaystack{clientEmail ? (
-  <button
-    onClick={() => payWithPaystack(clientEmail)}
-    disabled={loadingPayment}
-    style={{ backgroundColor: loadingPayment ? '#555' : '#00C853', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: loadingPayment ? 'not-allowed' : 'pointer' }}
-  >
-    {loadingPayment ? 'Processing...' : 'Pay ₦50,000 Deposit'}
-  </button>
-) : (
-  <button disabled style={{ backgroundColor: '#555', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: 'not-allowed' }}>
-    Enter email to pay
-  </button>
-)}</section>}
+                onClick={() => payWithPaystack(clientEmail)}
+                style={{ backgroundColor: loadingPayment? '#555' : '#00C853', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: loadingPayment? 'not-allowed' : 'pointer' }}>
+                {loadingPayment? 'Processing...' : 'Pay ₦50,000 Deposit'}
+              </button>) : (<button disabled style={{ backgroundColor: '#555', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: 'not-allowed' }}>Enter email to pay</button>)}</div></section>}
         </main>
       </div>
 
-    <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px', paddingBottom: '80px' }}>
+   <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px', paddingBottom: '80px' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px', textAlign: 'center' }}>
           <p style={{ marginTop: '30px', paddingTop: '20px', borderTop: `1px solid ${c.border}`, color: c.subtext, fontSize: '14px' }}>© 2026 {data.name}. Built by Success</p>
         </div>
       </footer>
 
-      {/* Floating Buttons - FIXED FOR MOBILE */}
       <div style={{ 
         position: 'fixed', 
-        bottom: '39px',  
+        bottom: '39px', 
         right: '13px', 
         display: 'flex', 
         flexDirection: 'column', 
