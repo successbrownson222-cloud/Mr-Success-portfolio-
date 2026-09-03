@@ -215,7 +215,91 @@ export default function App() {
 
           {activeTab === 'projects' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Projects</h2><div style={{ display: 'flex', gap: '8px', marginTop: '16px', flexWrap: 'wrap' }}>{categories.map((cat) => (<button key={cat} onClick={() => setFilter(cat)} style={{ padding: '6px 14px', backgroundColor: filter === cat? c.accent : c.card, color: filter === cat? theme === 'dark'? 'black' : 'white' : c.text, border: `1px solid ${c.border}`, borderRadius: '6px', cursor: 'pointer' }}>{cat}</button>))}</div>{filteredProjects.map((project) => (<div key={project.name} style={{ marginTop: '20px', padding: '20px', border: `1px solid ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}>{project.featured && (<span style={{ backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', padding: '4px 10px', borderRadius: '4px', fontSize: '12px' }}>Featured</span>)}<h3 style={{ fontWeight: 'bold', fontSize: '20px', marginTop: '8px' }}>{project.name}</h3><p style={{ fontSize: '14px', color: c.accent }}>{project.tech}</p><p style={{ color: c.subtext }}>{project.desc}</p></div>))}</section>}
 
-          {activeTab === 'pricing' && <section><h2 style={{ color: c.accent, fontSize: '28px', textAlign: 'center' }}>My Pricing</h2><div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>{data.pricing.map((plan) => (<div key={plan.name} style={{ padding: '24px', border: `2px solid ${plan.popular? c.accent : c.border}`, borderRadius: '16px', backgroundColor: c.card, position: 'relative' }}>{plan.popular && <span style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', padding: '4px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold' }}>MOST POPULAR</span>}<h3 style={{ fontSize: '22px', fontWeight: 'bold', textAlign: 'center' }}>{plan.name}</h3><p style={{ fontSize: '36px', fontWeight: 'bold', color: c.accent, textAlign: 'center', margin: '16px 0' }}>{plan.price}</p><ul style={{ listStyle: 'none', padding: 0, margin: '20px 0' }}>{plan.features.map((f) => <li key={f} style={{ padding: '8px 0', color: c.subtext }}>✓ {f}</li>)}</ul><button onClick={() => setActiveTab('contact')} style={{ width: '100%', padding: '14px', backgroundColor: c.accent, color: theme === 'dark'? 'black' : 'white', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Get Started</button></div>))}</div></section>}
+          {activeTab === 'pricing' && 
+<section>
+  <h2 style={{ color: c.accent, fontSize: '28px', textAlign: 'center' }}>
+    My Pricing
+  </h2>
+
+  <div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+    {data.pricing.map((plan) => (
+      <div 
+        key={plan.name} 
+        style={{ 
+          padding: '24px', 
+          border: `2px solid ${plan.popular ? c.accent : c.border}`, 
+          borderRadius: '16px', 
+          backgroundColor: c.card, 
+          position: 'relative' 
+        }}
+      >
+        {plan.popular && 
+          <span style={{ 
+            position: 'absolute', 
+            top: '-12px', 
+            left: '50%', 
+            transform: 'translateX(-50%)', 
+            backgroundColor: c.accent, 
+            color: theme === 'dark' ? 'black' : 'white', 
+            padding: '4px 12px', 
+            borderRadius: '20px', 
+            fontSize: '12px', 
+            fontWeight: 'bold' 
+          }}>
+            MOST POPULAR
+          </span>
+        }
+
+        <h3 style={{ fontSize: '22px', fontWeight: 'bold', textAlign: 'center' }}>
+          {plan.name}
+        </h3>
+
+        {/* FIXED PRICE SECTION - Now stacks NGN and USD */}
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          gap: '4px', 
+          fontSize: '36px', 
+          fontWeight: 'bold', 
+          color: c.accent, 
+          textAlign: 'center', 
+          margin: '16px 0' 
+        }}>
+          <span>{plan.price.split(' / ')[0]}</span>
+          <span style={{ fontSize: '24px', opacity: 0.8 }}>
+            / {plan.price.split(' / ')[1]}
+          </span>
+        </div>
+
+        <ul style={{ listStyle: 'none', padding: 0, margin: '20px 0' }}>
+          {plan.features.map((f) => 
+            <li key={f} style={{ padding: '8px 0', color: c.subtext }}>
+              ✓ {f}
+            </li>
+          )}
+        </ul>
+
+        <button 
+          onClick={() => setActiveTab('contact')} 
+          style={{ 
+            width: '100%', 
+            padding: '14px', 
+            backgroundColor: c.accent, 
+            color: theme === 'dark' ? 'black' : 'white', 
+            border: 'none', 
+            borderRadius: '8px', 
+            fontWeight: 'bold', 
+            cursor: 'pointer' 
+          }}
+        >
+          Get Started
+        </button>
+      </div>
+    ))}
+  </div>
+</section>
+}
 
           {activeTab === 'testimonials' && <section><h2 style={{ color: c.accent, fontSize: '28px', textAlign: 'center' }}>What People Say</h2><div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', marginTop: '24px' }}>{data.testimonials.map((t) => (<div key={t.name} style={{ padding: '20px', backgroundColor: c.card, borderRadius: '12px', border: `1px solid ${c.border}` }}>
             <StarRating rating={t.rating} />
