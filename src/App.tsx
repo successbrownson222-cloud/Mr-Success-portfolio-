@@ -7,7 +7,10 @@ export default function App() {
   const [sent, setSent] = useState(false);
   const [animateSkills, setAnimateSkills] = useState(false);
   const [clientEmail, setClientEmail] = useState('');
+  const [clientName, setClientName] = useState(''); // added for Flutterwave
+  const [clientPhone, setClientPhone] = useState(''); // added for Flutterwave
   const [loadingPayment, setLoadingPayment] = useState(false);
+  const [paymentType, setPaymentType] = useState('NGN'); // 'NGN' or 'USD'
 
   useEffect(() => {
     if (activeTab === 'skills') {
@@ -36,6 +39,7 @@ export default function App() {
     )
   }
 
+  // 1. PAYSTACK FOR NGN
   const payWithPaystack = async (email: string) => {
     if (!email) {
       alert('Please enter your email first');
@@ -46,12 +50,10 @@ export default function App() {
     try {
       const response = await fetch('https://portfolio-paystack-api.onrender.com/pay', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: email,
-          amount: 50000 * 100,
+          amount: 50000 * 100, // ₦50,000
           reference: 'deposit_' + Date.now(),
           metadata: {
             custom_fields: [
@@ -63,8 +65,45 @@ export default function App() {
 
       const result = await response.json();
 
-      if (result.status === true && result.data && result.data.authorization_url) {
+      if (result.status === true && result.data?.authorization_url) {
         window.location.href = result.data.authorization_url;
+      } else {
+        alert('Payment initiation failed: ' + (result.message || 'Unknown error'));
+      }
+
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Network error. Please try again.');
+    } finally {
+      setLoadingPayment(false);
+    }
+  };
+
+  // 2. FLUTTERWAVE FOR USD
+  const payWithFlutterwave = async (email: string, name: string, phone: string) => {
+    if (!email || !name || !phone) {
+      alert('Please fill email, name and phone for Flutterwave');
+      return;
+    }
+
+    setLoadingPayment(true);
+    try {
+      const response = await fetch('https://portfolio-paystack-api.onrender.com/pay/flutterwave', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          amount: 10, // $10 USD deposit
+          name: name,
+          phone: phone,
+          reference: 'FLW_deposit_' + Date.now()
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'success' && result.data?.link) {
+        window.location.href = result.data.link;
       } else {
         alert('Payment initiation failed: ' + (result.message || 'Unknown error'));
       }
@@ -111,9 +150,9 @@ export default function App() {
       { name: 'Weather App', tech: 'React.js, Tailwind', category: 'Frontend', desc: 'Real-time weather app with location search and 7-day forecast.', link: '#', featured: false },
     ],
     pricing: [
-      { name: 'Starter Website', price: '₦250,000', features: ['5 Pages Responsive', 'Contact Form + WhatsApp', 'Basic SEO Setup', '1 Month Support', 'Delivery: 7 Days'], popular: false },
-      { name: 'Business Website', price: '₦550,000', features: ['10 Pages Responsive', 'Blog + CMS', 'Paystack Integration', 'Admin Dashboard', 'Advanced SEO + 3 Months Support'], popular: true },
-      { name: 'E-commerce + Web App', price: '₦1,200,000', features: ['Unlimited Products', 'Payment + Inventory', 'Admin + Analytics', 'Custom Features', '6 Months Support'], popular: false },
+      { name: 'Starter Website', price: '₦250,000 / $150', features: ['5 Pages Responsive', 'Contact Form + WhatsApp', 'Basic SEO Setup', '1 Month Support', 'Delivery: 7 Days'], popular: false },
+      { name: 'Business Website', price: '₦550,000 / $350', features: ['10 Pages Responsive', 'Blog + CMS', 'Paystack + Flutterwave Integration', 'Admin Dashboard', 'Advanced SEO + 3 Months Support'], popular: true },
+      { name: 'E-commerce + Web App', price: '₦1,200,000 / $750', features: ['Unlimited Products', 'Payment + Inventory', 'Admin + Analytics', 'Custom Features', '6 Months Support'], popular: false },
     ],
     testimonials: [
       { name: "UNN Final Year Project", review: "Delivered a full-stack student portal with authentication. Project scored 92% and was used as a reference.", role: "Academic Project", rating: 5 },
@@ -188,16 +227,68 @@ export default function App() {
 
           {activeTab === 'blog' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Blog</h2><div style={{ marginTop: '20px', padding: '20px', border: `1px solid ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}><p style={{ color: c.subtext, fontSize: '14px' }}>Aug 19, 2025</p><h3 style={{ fontWeight: 'bold', fontSize: '20px', marginTop: '8px', color: c.text }}>Debugging a Vercel Build Failure</h3><p style={{ color: c.subtext, marginTop: '8px' }}>How a single typo caused a failed Vercel deployment.</p></div></section>}
 
-          {activeTab === 'contact' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Contact Me</h2><p style={{ color: c.subtext }}>Have a project in mind? Send me a message or pay 50% deposit to get started.</p><form action="https://api.web3forms.com/submit" method="POST" onSubmit={() => setSent(true)} style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}><input type="hidden" name="access_key" value="76d94847-2692-48b6-ad92-4819b1f2b838" /><input type="text" name="name" placeholder="Your Name" required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><input type="email" name="email" placeholder="Your Email" required onChange={(e) => setClientEmail(e.target.value)} style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><textarea name="message" placeholder="Your Message" rows={4} required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><button type="submit" disabled={sent} style={{ backgroundColor: sent? '#555' : c.accent, color: theme === 'dark'? 'black' : 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: sent? 'not-allowed' : 'pointer' }}>{sent? 'Message Sent! ✓' : 'Send Message'}</button></form><div style={{ marginTop: '20px', padding: '16px', border: `1px dashed ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}><h3>Ready to start?</h3><p style={{ color: c.subtext, fontSize: '14px' }}>Pay ₦50,000 deposit to secure your project slot</p><input type="email" placeholder="Enter your email for receipt" value={clientEmail} onChange={(e) => setClientEmail(e.target.value)} required style={{ width: '100%', padding: '12px', backgroundColor: c.bg, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text, marginBottom: '12px', boxSizing: 'border-box' }} />{clientEmail? (<button
-                disabled={loadingPayment}
-                onClick={() => payWithPaystack(clientEmail)}
-                style={{ backgroundColor: loadingPayment? '#555' : '#00C853', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: loadingPayment? 'not-allowed' : 'pointer' }}>
-                {loadingPayment? 'Processing...' : 'Pay ₦50,000 Deposit'}
-              </button>) : (<button disabled style={{ backgroundColor: '#555', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: 'not-allowed' }}>Enter email to pay</button>)}</div></section>}
+          {activeTab === 'contact' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Contact Me</h2><p style={{ color: c.subtext }}>Have a project in mind? Send me a message or pay 50% deposit to get started.</p><form action="https://api.web3forms.com/submit" method="POST" onSubmit={() => setSent(true)} style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}><input type="hidden" name="access_key" value="76d94847-2692-48b6-ad92-4819b1f2b838" /><input type="text" name="name" placeholder="Your Name" required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><input type="email" name="email" placeholder="Your Email" required onChange={(e) => {setClientEmail(e.target.value); setClientName(e.target.name)}} style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><textarea name="message" placeholder="Your Message" rows={4} required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><button type="submit" disabled={sent} style={{ backgroundColor: sent? '#555' : c.accent, color: theme === 'dark'? 'black' : 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: sent? 'not-allowed' : 'pointer' }}>{sent? 'Message Sent! ✓' : 'Send Message'}
+    </button>
+  </form>
+
+  {/* PAYMENT SECTION */}
+  <div style={{ marginTop: '20px', padding: '16px', border: `1px dashed ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}>
+    <h3>Ready to start?</h3>
+    <p style={{ color: c.subtext, fontSize: '14px' }}>Choose payment method for your deposit</p>
+    
+    {/* Currency Toggle */}
+    <div style={{ display: 'flex', gap: '8px', margin: '12px 0' }}>
+      <button 
+        type="button"
+        onClick={() => setPaymentType('NGN')} 
+        style={{ padding: '8px 16px', backgroundColor: paymentType === 'NGN' ? c.accent : c.border, color: paymentType === 'NGN' ? 'black' : c.text, border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}
+      >
+        ₦ NGN - Paystack
+      </button>
+      <button 
+        type="button"
+        onClick={() => setPaymentType('USD')} 
+        style={{ padding: '8px 16px', backgroundColor: paymentType === 'USD' ? c.accent : c.border, color: paymentType === 'USD' ? 'black' : c.text, border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}
+      >
+        $ USD - Flutterwave
+      </button>
+    </div>
+
+    <input 
+      type="tel" 
+      placeholder="Phone Number e.g 08012345678" 
+      value={clientPhone} 
+      onChange={(e) => setClientPhone(e.target.value)} 
+      style={{ width: '100%', padding: '12px', backgroundColor: c.bg, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text, marginBottom: '12px', boxSizing: 'border-box' }} 
+    />
+
+    {paymentType === 'NGN' ? (
+      <button
+        type="button"
+        disabled={loadingPayment || !clientEmail}
+        onClick={() => payWithPaystack(clientEmail)}
+        style={{ backgroundColor: loadingPayment? '#555' : '#00C853', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: loadingPayment? 'not-allowed' : 'pointer' }}
+      >
+        {loadingPayment? 'Processing...' : 'Pay ₦50,000 Deposit'}
+      </button>
+    ) : (
+      <button
+        type="button"
+        disabled={loadingPayment || !clientEmail || !clientName || !clientPhone}
+        onClick={() => payWithFlutterwave(clientEmail, clientName, clientPhone)}
+        style={{ backgroundColor: loadingPayment? '#555' : '#FBAA19', color: 'black', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: loadingPayment? 'not-allowed' : 'pointer' }}
+      >
+        {loadingPayment? 'Processing...' : 'Pay $10 Deposit'}
+      </button>
+    )}
+  </div>
+  
+  </section>}
+
         </main>
       </div>
 
-   <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px', paddingBottom: '80px' }}>
+      <footer style={{ backgroundColor: c.card, borderTop: `1px solid ${c.border}`, marginTop: '60px', paddingBottom: '80px' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px 20px', textAlign: 'center' }}>
           <p style={{ marginTop: '30px', paddingTop: '20px', borderTop: `1px solid ${c.border}`, color: c.subtext, fontSize: '14px' }}>© 2026 {data.name}. Built by Success</p>
         </div>
