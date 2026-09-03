@@ -227,63 +227,46 @@ export default function App() {
 
           {activeTab === 'blog' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Blog</h2><div style={{ marginTop: '20px', padding: '20px', border: `1px solid ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}><p style={{ color: c.subtext, fontSize: '14px' }}>Aug 19, 2025</p><h3 style={{ fontWeight: 'bold', fontSize: '20px', marginTop: '8px', color: c.text }}>Debugging a Vercel Build Failure</h3><p style={{ color: c.subtext, marginTop: '8px' }}>How a single typo caused a failed Vercel deployment.</p></div></section>}
 
-          {activeTab === 'contact' && <section><h2 style={{ color: c.accent, fontSize: '28px' }}>Contact Me</h2><p style={{ color: c.subtext }}>Have a project in mind? Send me a message or pay 50% deposit to get started.</p><form action="https://api.web3forms.com/submit" method="POST" onSubmit={() => setSent(true)} style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}><input type="hidden" name="access_key" value="76d94847-2692-48b6-ad92-4819b1f2b838" /><input type="text" name="name" placeholder="Your Name" required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><input type="email" name="email" placeholder="Your Email" required onChange={(e) => {setClientEmail(e.target.value); setClientName(e.target.name)}} style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><textarea name="message" placeholder="Your Message" rows={4} required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} /><button type="submit" disabled={sent} style={{ backgroundColor: sent? '#555' : c.accent, color: theme === 'dark'? 'black' : 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: sent? 'not-allowed' : 'pointer' }}>{sent? 'Message Sent! ✓' : 'Send Message'}
-    </button>
+       {activeTab === 'contact' && 
+<section>
+  <h2 style={{ color: c.accent, fontSize: '28px' }}>Contact Me</h2>
+  <p style={{ color: c.subtext }}>Pay 50% deposit to get started.</p>
+
+  <form action="https://api.web3forms.com/submit" method="POST" onSubmit={() => setSent(true)} style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+    <input type="hidden" name="access_key" value="76d94847-2692-48b6-ad92-4819b1f2b838" />
+    <input type="text" name="name" placeholder="Your Name" required onChange={(e) => setClientName(e.target.value)} style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} />
+    <input type="email" name="email" placeholder="Your Email" required onChange={(e) => setClientEmail(e.target.value)} style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} />
+    <textarea name="message" placeholder="Your Message" rows={4} required style={{ padding: '12px', backgroundColor: c.card, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text }} />
+    <button type="submit" disabled={sent} style={{ backgroundColor: sent? '#555' : c.accent, color: theme === 'dark'? 'black' : 'white', padding: '14px', border: 'none', borderRadius: '8px', fontWeight: 'bold' }}>{sent? 'Message Sent! ✓' : 'Send Message'}</button>
   </form>
 
-  {/* PAYMENT SECTION */}
   <div style={{ marginTop: '20px', padding: '16px', border: `1px dashed ${c.border}`, borderRadius: '12px', backgroundColor: c.card }}>
     <h3>Ready to start?</h3>
-    <p style={{ color: c.subtext, fontSize: '14px' }}>Choose payment method for your deposit</p>
-    
-    {/* Currency Toggle */}
     <div style={{ display: 'flex', gap: '8px', margin: '12px 0' }}>
-      <button 
-        type="button"
-        onClick={() => setPaymentType('NGN')} 
-        style={{ padding: '8px 16px', backgroundColor: paymentType === 'NGN' ? c.accent : c.border, color: paymentType === 'NGN' ? 'black' : c.text, border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}
-      >
-        ₦ NGN - Paystack
-      </button>
-      <button 
-        type="button"
-        onClick={() => setPaymentType('USD')} 
-        style={{ padding: '8px 16px', backgroundColor: paymentType === 'USD' ? c.accent : c.border, color: paymentType === 'USD' ? 'black' : c.text, border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}
-      >
-        $ USD - Flutterwave
-      </button>
+      <button type="button" onClick={() => setPaymentType('NGN')} style={{ padding: '8px 16px', backgroundColor: paymentType === 'NGN'? c.accent : c.border, color: 'black', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', width: '50%' }}>₦ NGN</button>
+      <button type="button" onClick={() => setPaymentType('USD')} style={{ padding: '8px 16px', backgroundColor: paymentType === 'USD'? c.accent : c.border, color: 'black', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', width: '50%' }}>$ USD</button>
     </div>
+    
+    <input type="email" placeholder="Email for receipt" value={clientEmail} onChange={(e) => setClientEmail(e.target.value)} required style={{ width: '100%', padding: '12px', backgroundColor: c.bg, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text, marginBottom: '8px' }} />
+    
+    {paymentType === 'USD' && (
+      <>
+        <input type="text" placeholder="Full Name" value={clientName} onChange={(e) => setClientName(e.target.value)} required style={{ width: '100%', padding: '12px', backgroundColor: c.bg, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text, marginBottom: '8px' }} />
+        <input type="tel" placeholder="Phone Number" value={clientPhone} onChange={(e) => setClientPhone(e.target.value)} required style={{ width: '100%', padding: '12px', backgroundColor: c.bg, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text, marginBottom: '8px' }} />
+      </>
+    )}
 
-    <input 
-      type="tel" 
-      placeholder="Phone Number e.g 08012345678" 
-      value={clientPhone} 
-      onChange={(e) => setClientPhone(e.target.value)} 
-      style={{ width: '100%', padding: '12px', backgroundColor: c.bg, border: `1px solid ${c.border}`, borderRadius: '8px', color: c.text, marginBottom: '12px', boxSizing: 'border-box' }} 
-    />
-
-    {paymentType === 'NGN' ? (
-      <button
-        type="button"
-        disabled={loadingPayment || !clientEmail}
-        onClick={() => payWithPaystack(clientEmail)}
-        style={{ backgroundColor: loadingPayment? '#555' : '#00C853', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: loadingPayment? 'not-allowed' : 'pointer' }}
-      >
+    {paymentType === 'NGN'? (
+      <button type="button" disabled={loadingPayment ||!clientEmail} onClick={() => payWithPaystack(clientEmail)} style={{ backgroundColor: loadingPayment? '#555' : '#00C853', color: 'white', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontWeight: 'bold', opacity: !clientEmail? 0.5 : 1 }}>
         {loadingPayment? 'Processing...' : 'Pay ₦50,000 Deposit'}
       </button>
     ) : (
-      <button
-        type="button"
-        disabled={loadingPayment || !clientEmail || !clientName || !clientPhone}
-        onClick={() => payWithFlutterwave(clientEmail, clientName, clientPhone)}
-        style={{ backgroundColor: loadingPayment? '#555' : '#FBAA19', color: 'black', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontSize: '16px', fontWeight: 'bold', cursor: loadingPayment? 'not-allowed' : 'pointer' }}
-      >
+      <button type="button" disabled={loadingPayment ||!clientEmail ||!clientName ||!clientPhone} onClick={() => payWithFlutterwave(clientEmail, clientName, clientPhone)} style={{ backgroundColor: loadingPayment? '#555' : '#FBAA19', color: 'black', padding: '14px', border: 'none', borderRadius: '8px', width: '100%', fontWeight: 'bold', opacity: !clientEmail ||!clientName ||!clientPhone? 0.5 : 1 }}>
         {loadingPayment? 'Processing...' : 'Pay $10 Deposit'}
       </button>
     )}
   </div>
-  
-  </section>}
+</section>}
 
         </main>
       </div>
