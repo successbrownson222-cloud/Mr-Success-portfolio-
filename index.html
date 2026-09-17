@@ -17,32 +17,75 @@
 <meta property="og:image" content="https://files.catbox.moe/b84keh.jpg" />
 <meta property="og:url" content="https://mr-brownson-success-portfolio.vercel.app/" />
 
-<!-- Favicon -->
-<link rel="icon" href="https://files.catbox.moe/b84keh.jpg" />
+    <!-- Favicon -->
+    <link rel="icon" href="https://files.catbox.moe/b84keh.jpg" />
 
-<!-- PASTE HERE - START -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Success Brownson",
-  "url": "https://mr-brownson-success-portfolio.vercel.app/",
-  "image": "https://files.catbox.moe/b84keh.jpg",
-  "jobTitle": "Fullstack Developer",
-  "description": "Full-stack developer based in Abia, Nigeria with 6+ years experience in React, Node.js, Java Spring Boot, Python, Django, PHP Laravel, Next.js and PWA.",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Abia",
-    "addressCountry": "NG"
-  },
-  "knowsAbout": ["React.js", "Next.js", "Node.js", "Java Spring Boot", "Python", "Django", "PHP Laravel", "TypeScript", "JavaScript", "Progressive Web Apps", "Paystack", "Flutterwave"],
-  "sameAs": [
-    "https://www.linkedin.com/in/success-brownson/",
-    "https://github.com/SuccessBrownson"
-  ]
-}
-</script>
-<!-- PASTE HERE - END -->
+    <!-- SEO SCHEMA - Skills + Rating + Projects JOINED TOGETHER -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://mr-brownson-success-portfolio.vercel.app/#person",
+          "name": "Success Brownson",
+          "url": "https://mr-brownson-success-portfolio.vercel.app/",
+          "image": "https://files.catbox.moe/b84keh.jpg",
+          "jobTitle": "Fullstack Developer",
+          "description": "Full-stack developer based in Abia, Nigeria with 6+ years experience in React, Node.js, Java Spring Boot, Python, Django, PHP Laravel, Next.js and PWA.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Abia",
+            "addressCountry": "NG"
+          },
+          "knowsAbout": ["React.js", "Next.js", "Node.js", "Java Spring Boot", "Python", "Django", "PHP Laravel", "TypeScript", "JavaScript", "Progressive Web Apps", "Paystack", "Flutterwave"],
+          "sameAs": [
+            "https://www.linkedin.com/in/success-brownson/",
+            "https://github.com/SuccessBrownson"
+          ],
+          "hasOccupation": {
+            "@type": "Occupation",
+            "name": "Fullstack Developer",
+            "skills": "React, Next.js, Node.js, Java Spring Boot, Python, Django, PHP Laravel, TypeScript, Paystack, Flutterwave, PWA"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "bestRating": "5",
+            "worstRating": "1",
+            "ratingCount": "27",
+            "reviewCount": "27"
+          }
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://mr-brownson-success-portfolio.vercel.app/#projects",
+          "name": "Success Brownson Portfolio Projects",
+          "creator": { "@id": "https://mr-brownson-success-portfolio.vercel.app/#person" },
+          "hasPart": [
+            {
+              "@type": "SoftwareApplication",
+              "name": "Fintech Payment Solution",
+              "description": "Fullstack fintech app with Paystack and Flutterwave integration",
+              "applicationCategory": "FinanceApplication"
+            },
+            {
+              "@type": "SoftwareApplication",
+              "name": "E-commerce PWA Platform",
+              "description": "Progressive Web App e-commerce platform built with Next.js and Node.js",
+              "applicationCategory": "BusinessApplication"
+            },
+            {
+              "@type": "SoftwareApplication",
+              "name": "Enterprise Management System",
+              "description": "Java Spring Boot + React enterprise system",
+              "applicationCategory": "BusinessApplication"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
