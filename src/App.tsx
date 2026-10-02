@@ -147,7 +147,14 @@ export default function App() {
   { name: 'Python Expense Tracker', tech: 'Python, CLI', category: 'Backend', desc: 'CLI expense tracker built with Python after Codeliber course. Tracks income/expenses, calculates N9300 balance with history log. Live on GitHub.', link: 'https://github.com/successbrownson222-cloud/expense-tracker', featured: true },
   { name: 'Spring Boot Banking API', tech: 'Java, Spring Boot, PostgreSQL', category: 'Backend', desc: 'Secure REST APIs for mobile banking app with JWT auth and transaction logs.', link: '#', featured: true },
   { name: 'Portfolio Dashboard', tech: 'React.js, Python, FastAPI', category: 'Fullstack', desc: 'Admin dashboard to manage content and view analytics with charts.', link: '#', featured: false },
-  { name: 'Weather App', tech: 'React.js, Tailwind', category: 'Frontend', desc: 'Real-time weather app with location search and 7-day forecast.', link: '#', featured: false },
+  {
+  title: "Lagos Weather App - Fullstack",
+  description: "Fullstack weather app with CLI, FastAPI backend & clean frontend. Built without API keys using wttr.in",
+  tech: ["Python", "FastAPI", "JavaScript"],
+  github: "https://github.com/successbrownson222-cloud/lagos-weather-app",
+  live: "https://github.com/successbrownson222-cloud/lagos-weather-app",
+  image: "/weather.png"
+},
 ],
     pricing: [
       { name: 'Starter Website', price: '₦250,000 / $150', features: ['5 Pages Responsive', 'Contact Form + WhatsApp', 'Basic SEO Setup', '1 Month Support', 'Delivery: 7 Days'], popular: false },
